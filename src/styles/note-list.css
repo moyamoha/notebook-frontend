@@ -1,0 +1,47 @@
+.note-list {
+  width: 25%;
+  height: 100%;
+}
+
+.note-list-placeholder,
+.note-row {
+  padding: 15px 10px;
+  display: flex;
+  align-items: center;
+  background-color: #ddd;
+}
+
+.note-row {
+  border-bottom: 1px solid #353535;
+  justify-content: space-between;
+}
+
+.note-row.selected {
+  background-color: #5183f5;
+}
+
+.note-row-heart {
+  color: rgb(255, 49, 49);
+  cursor: pointer;
+}
+
+.create-note {
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #debace;
+  color: #453c67;
+  gap: 8px;
+  transition: all 300ms ease-in;
+  position: relative;
+}
+
+.create-note-icon {
+  transition: scale 300ms ease-out;
+}
+
+.create-note-icon:hover {
+  scale: 1.2;
+}

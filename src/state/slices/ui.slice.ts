@@ -1,0 +1,68 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+type IActiveNave =
+  | ''
+  | 'new_note'
+  | 'scratch_pad'
+  | 'favorites'
+  | 'settings'
+  | 'all_notes';
+
+type InitialStateT = {
+  error: string;
+  activeNav: IActiveNave;
+  isCreatingNew: boolean;
+  expandNotebooks: boolean;
+  loginButtonLoading: boolean;
+  signupBtnLoading: boolean;
+  isEditingExistingNotebook: boolean;
+};
+
+const initialState: InitialStateT = {
+  error: '',
+  activeNav: 'scratch_pad',
+  isCreatingNew: false,
+  isEditingExistingNotebook: false,
+  expandNotebooks: true,
+  loginButtonLoading: false,
+  signupBtnLoading: false,
+};
+
+const uiSlice = createSlice({
+  name: 'ui',
+  initialState: initialState,
+  reducers: {
+    setError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
+    setActiveNav: (state, action: PayloadAction<IActiveNave>) => {
+      state.activeNav = action.payload;
+    },
+    setIsCreatingNew: (state, action: PayloadAction<boolean>) => {
+      state.isCreatingNew = action.payload;
+    },
+    setExpandNotebooks: (state, action: PayloadAction<boolean>) => {
+      state.expandNotebooks = action.payload;
+    },
+    setLoginButtonLoading: (state, action: PayloadAction<boolean>) => {
+      state.loginButtonLoading = action.payload;
+    },
+    setSignupBtnLoading: (state, action: PayloadAction<boolean>) => {
+      state.signupBtnLoading = action.payload;
+    },
+    setIsEditingExistingNotebook: (state, action: PayloadAction<boolean>) => {
+      state.isEditingExistingNotebook = action.payload;
+    },
+  },
+});
+
+export const {
+  setError,
+  setActiveNav,
+  setIsCreatingNew,
+  setExpandNotebooks,
+  setLoginButtonLoading,
+  setSignupBtnLoading,
+  setIsEditingExistingNotebook,
+} = uiSlice.actions;
+export default uiSlice.reducer;

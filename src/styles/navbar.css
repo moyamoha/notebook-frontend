@@ -1,0 +1,50 @@
+.navbar {
+  background-color: #2d2d2d;
+  color: rgb(235, 235, 235);
+  width: 25%;
+}
+
+.nav-line,
+.nb-section {
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.nb-row {
+  padding: 10px 15px;
+  padding-left: 20px;
+  display: flex;
+  font-size: 0.9rem;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+  position: relative;
+}
+
+.nb-section {
+  height: 42px;
+}
+
+.nav-line:hover {
+  background-color: #3a3a3a;
+  color: white;
+}
+
+.navbar .active {
+  background-color: black;
+}
+
+.navbar .active .nav-icon {
+  color: green;
+}
+
+.nav-icon {
+  font-size: large;
+}
+
+.nb-cont {
+  border-bottom: 1px solid whitesmoke;
+}
