@@ -22,16 +22,6 @@ const dataSlice = createSlice({
     setFavorites: (state, action: PayloadAction<Note[]>) => {
       state.favorites = action.payload;
     },
-    addToFavorites: (state, action: PayloadAction<Note>) => {
-      state.favorites.push(action.payload);
-    },
-    removeFromFavorites: (state, action: PayloadAction<string>) => {
-      const nodeIndex = state.favorites.findIndex(
-        (n) => n._id === action.payload,
-      );
-      if (nodeIndex === -1) return;
-      state.favorites.splice(nodeIndex, 1);
-    },
     removeNotebook: (state, action: PayloadAction<string>) => {
       const index = state.notebooks.findIndex(
         (nb) => nb._id === action.payload,

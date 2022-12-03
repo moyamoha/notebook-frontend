@@ -38,7 +38,7 @@ export function addToFavorites(note: Note) {
       const favorites: Note[] = JSON.parse(favsString);
       favorites.push(note);
       localStorage.setItem('favorites', JSON.stringify(favorites));
-      dispatch(setFavorites(favorites));
+      dispatch(addToFavorites(note));
     }
   };
 }
