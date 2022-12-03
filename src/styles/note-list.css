@@ -18,7 +18,8 @@
 }
 
 .note-row:hover {
-  background-color: #dedede;
+  background-color: #c6c6c6;
+  cursor: pointer;
 }
 
 .note-row.selected {

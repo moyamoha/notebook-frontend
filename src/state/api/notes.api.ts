@@ -28,3 +28,33 @@ export function getFavorites() {
     }
   };
 }
+
+export function addToFavorites(note: Note) {
+  return (dispatch: AppDispatch, getState: () => IStore) => {
+    const favsString = localStorage.getItem('favorites');
+    if (!favsString) {
+      localStorage.setItem('favorites', JSON.stringify([note]));
+    } else {
+      const favorites: Note[] = JSON.parse(favsString);
+      favorites.push(note);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      dispatch(setFavorites(favorites));
+    }
+  };
+}
+
+export function removeFromFavorites(noteId: string) {
+  return (dispatch: AppDispatch, getState: () => IStore) => {
+    const favsString = localStorage.getItem('favorites');
+    if (!favsString) {
+      localStorage.setItem('favorites', JSON.stringify([]));
+    } else {
+      const favorites: Note[] = JSON.parse(favsString);
+      const index = favorites.findIndex((f) => f._id === noteId);
+      if (index === -1) return;
+      favorites.splice(index, 1);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      dispatch(setFavorites(favorites));
+    }
+  };
+}

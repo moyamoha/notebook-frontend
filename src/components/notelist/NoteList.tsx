@@ -12,7 +12,7 @@ type NoteListPropsType = {
 };
 
 export default function NoteList({ notes, canAddNew }: NoteListPropsType) {
-  const current = useAppSelector((s) => s.data.currentNotebook);
+  // const current = useAppSelector((s) => s.data.currentNotebook);
   return (
     <div className="note-list">
       {notes.length > 0 ? (
