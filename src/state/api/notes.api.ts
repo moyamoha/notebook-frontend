@@ -32,13 +32,14 @@ export function getFavorites() {
 export function addToFavorites(note: Note) {
   return (dispatch: AppDispatch, getState: () => IStore) => {
     const favsString = localStorage.getItem('favorites');
+    console.log('tuli tänne');
     if (!favsString) {
       localStorage.setItem('favorites', JSON.stringify([note]));
     } else {
       const favorites: Note[] = JSON.parse(favsString);
       favorites.push(note);
       localStorage.setItem('favorites', JSON.stringify(favorites));
-      dispatch(addToFavorites(note));
+      dispatch(setFavorites(favorites));
     }
   };
 }

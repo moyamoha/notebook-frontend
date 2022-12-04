@@ -1,7 +1,7 @@
 import RichEditor from '../components/editor/RichEditor';
 import Layout from '../components/layout/Layout';
 import NoteList from '../components/notelist/NoteList';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { useAppSelector } from '../state/hooks';
 
 export default function Notebook() {
   const favorites = useAppSelector((s) => s.data.favorites);
