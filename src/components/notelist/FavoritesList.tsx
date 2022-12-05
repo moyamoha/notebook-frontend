@@ -1,31 +1,27 @@
 import { useAppSelector } from '../../state/hooks';
-import { Note } from '../../state/types';
+import { FavoriteNote, Note } from '../../state/types';
 import CreateNote from './CreateNote';
 import NoteRow from './NoteRow';
 
 import '../../styles/note-list.css';
 import NotelistPlaceholder from './NotelistPlaceholder';
+import FavoriteNoteRow from './FavoriteNoteRow';
 
 type NoteListPropsType = {
-  notes: Note[];
-  canAddNew: boolean;
-  showNotebookName: boolean;
+  notes: FavoriteNote[];
 };
 
-export default function NoteList({
-  notes,
-  canAddNew,
-  showNotebookName,
-}: NoteListPropsType) {
+export default function FavoritesList({ notes }: NoteListPropsType) {
   // const current = useAppSelector((s) => s.data.currentNotebook);
   return (
     <div className="note-list">
       {notes.length > 0 ? (
-        notes.map((n) => <NoteRow note={n} key={n._id}></NoteRow>)
+        notes.map((n) => (
+          <FavoriteNoteRow note={n} key={n._id}></FavoriteNoteRow>
+        ))
       ) : (
-        <NotelistPlaceholder canAddNew={canAddNew}></NotelistPlaceholder>
+        <NotelistPlaceholder canAddNew={false}></NotelistPlaceholder>
       )}
-      {canAddNew && <CreateNote></CreateNote>}
     </div>
   );
 }

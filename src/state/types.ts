@@ -7,6 +7,12 @@ export type Note = {
   updatedAt: string | Date;
 };
 
+export type DraftNote = Pick<Note, 'content'> & { noteBookId: string };
+
+export type FavoriteNote = Note & {
+  notebookName: string;
+};
+
 export type Notebook = {
   name: string;
   _id: string;

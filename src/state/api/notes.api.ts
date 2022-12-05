@@ -1,12 +1,12 @@
 import axios from 'axios';
+import { getNotesNotebookName } from '../../utils/functions';
 import { setFavorites } from '../slices/data.slice';
-import { AppDispatch, IStore, Note } from '../types';
-import { getNotebooks } from './notebooks.api';
+import { AppDispatch, FavoriteNote, IStore, Note } from '../types';
 
 export function deleteNote() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     const notebook = getState().data.currentNotebook;
-    const note = getState().note.currentNote;
+    const note = getState().note.currentNote as Note;
     try {
       if (!notebook || !note) {
         // SHOW PROPER ERROR MESSAGE
@@ -23,7 +23,7 @@ export function getFavorites() {
     if (!favsString) {
       localStorage.setItem('favorites', JSON.stringify([]));
     } else {
-      const favorites: Note[] = JSON.parse(favsString);
+      const favorites: FavoriteNote[] = JSON.parse(favsString);
       dispatch(setFavorites(favorites));
     }
   };
@@ -32,12 +32,15 @@ export function getFavorites() {
 export function addToFavorites(note: Note) {
   return (dispatch: AppDispatch, getState: () => IStore) => {
     const favsString = localStorage.getItem('favorites');
-    console.log('tuli tänne');
+    const notesNotebookName = getNotesNotebookName(
+      getState().data.notebooks,
+      note._id,
+    );
     if (!favsString) {
       localStorage.setItem('favorites', JSON.stringify([note]));
     } else {
-      const favorites: Note[] = JSON.parse(favsString);
-      favorites.push(note);
+      const favorites: FavoriteNote[] = JSON.parse(favsString);
+      favorites.push({ ...note, notebookName: notesNotebookName });
       localStorage.setItem('favorites', JSON.stringify(favorites));
       dispatch(setFavorites(favorites));
     }
@@ -50,7 +53,7 @@ export function removeFromFavorites(noteId: string) {
     if (!favsString) {
       localStorage.setItem('favorites', JSON.stringify([]));
     } else {
-      const favorites: Note[] = JSON.parse(favsString);
+      const favorites: FavoriteNote[] = JSON.parse(favsString);
       const index = favorites.findIndex((f) => f._id === noteId);
       if (index === -1) return;
       favorites.splice(index, 1);

@@ -1,14 +1,18 @@
 import { htmlToText } from 'html-to-text';
 import React from 'react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
+import { SlNotebook } from 'react-icons/sl';
 import { addToFavorites, removeFromFavorites } from '../../state/api/notes.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { Note } from '../../state/types';
 import '../../styles/note-list.css';
-import { getTwoFirstWords } from '../../utils/functions';
-import { getTextFromHtmlString } from '../../utils/htmlToText';
+import { getNotesNotebookName, getTwoFirstWords } from '../../utils/functions';
 
-export default function NoteRow({ note }: { note: Note }) {
+type NoteRowPropsType = {
+  note: Note;
+};
+
+export default function NoteRow({ note }: NoteRowPropsType) {
   const dispatch = useAppDispatch();
   const favorites = useAppSelector((s) => s.data.favorites);
   const isNoteInFavorites = React.useMemo(

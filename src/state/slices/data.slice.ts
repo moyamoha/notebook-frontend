@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Note, Notebook } from '../types';
+import { FavoriteNote, Note, Notebook } from '../types';
 
 export type InitialStateT = {
   notebooks: Notebook[];
-  favorites: Note[];
+  favorites: FavoriteNote[];
   currentNotebook: Notebook | null;
 };
 
@@ -19,7 +19,7 @@ const dataSlice = createSlice({
     setNotebooks: (state, action: PayloadAction<Notebook[]>) => {
       state.notebooks = action.payload;
     },
-    setFavorites: (state, action: PayloadAction<Note[]>) => {
+    setFavorites: (state, action: PayloadAction<FavoriteNote[]>) => {
       state.favorites = action.payload;
     },
     removeNotebook: (state, action: PayloadAction<string>) => {

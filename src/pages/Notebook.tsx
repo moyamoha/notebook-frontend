@@ -8,6 +8,7 @@ export default function Notebook() {
   return (
     <Layout>
       <NoteList
+        showNotebookName={false}
         notes={current ? current.notes : []}
         canAddNew={true}
       ></NoteList>
