@@ -29,3 +29,12 @@ export const getNotesNotebookName = (
   }
   return res;
 };
+
+export const dateToPrettyString = (datetime: Date | string) => {
+  // const h = datetime.getHours()
+  // const m = datetime.getMinutes()
+  const date = new Date(datetime);
+  const time = date.toLocaleTimeString().replaceAll('\\.', '/').substring(0, 5);
+  const datePart = date.toLocaleDateString();
+  return `${time} on ${datePart}`;
+};

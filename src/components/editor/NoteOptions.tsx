@@ -1,6 +1,8 @@
 import { BsTrash } from 'react-icons/bs';
+import { GrUpdate } from 'react-icons/gr';
 import { useAppSelector } from '../../state/hooks';
 import { Note } from '../../state/types';
+import { dateToPrettyString } from '../../utils/functions';
 import HeartIcon from '../common/HeartIcon';
 import Spacer from '../common/Spacer';
 
@@ -17,7 +19,10 @@ export default function NoteOptions() {
       </div>
       <Spacer></Spacer>
       <div className="note-option">
-        <span>{currentNote.updatedAt.toLocaleString()}</span>
+        <span style={{ fontSize: '0.7rem' }}>
+          {dateToPrettyString(currentNote.updatedAt)}
+        </span>
+        <GrUpdate></GrUpdate>
       </div>
     </div>
   );
