@@ -5,3 +5,32 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.editor-placeholder {
+  width: 50%;
+  height: calc(100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.note-options {
+  background-color: #e5e5e5;
+  padding: 0;
+  height: 40px;
+  border-left: 1px solid rgb(163, 163, 163);
+  display: flex;
+}
+
+.note-options .note-option {
+  cursor: pointer;
+  padding: 0px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.note-options .note-option:hover {
+  background-color: #ccc;
+}

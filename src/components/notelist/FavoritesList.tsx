@@ -1,11 +1,8 @@
-import { useAppSelector } from '../../state/hooks';
-import { FavoriteNote, Note } from '../../state/types';
-import CreateNote from './CreateNote';
-import NoteRow from './NoteRow';
-
-import '../../styles/note-list.css';
+import { FavoriteNote } from '../../state/types';
 import NotelistPlaceholder from './NotelistPlaceholder';
 import FavoriteNoteRow from './FavoriteNoteRow';
+
+import '../../styles/note-list.css';
 
 type NoteListPropsType = {
   notes: FavoriteNote[];
