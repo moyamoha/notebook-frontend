@@ -43,6 +43,16 @@ const dataSlice = createSlice({
     setCurrentNotebook: (state, action: PayloadAction<Notebook | null>) => {
       state.currentNotebook = action.payload;
     },
+    addNoteToNotebook: (
+      state,
+      action: PayloadAction<{ notebookId: String; note: Note }>,
+    ) => {
+      const index = state.notebooks.findIndex(
+        (nb) => nb._id === action.payload.notebookId,
+      );
+      state.notebooks[index].notes.unshift(action.payload.note);
+      state.currentNotebook = state.notebooks[index];
+    },
   },
 });
 
@@ -53,5 +63,6 @@ export const {
   setCurrentNotebook,
   renameNotebook,
   setFavorites,
+  addNoteToNotebook,
 } = dataSlice.actions;
 export default dataSlice.reducer;

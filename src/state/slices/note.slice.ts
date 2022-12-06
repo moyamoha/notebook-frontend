@@ -1,16 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DraftNote, Note } from '../types';
+import { Note } from '../types';
 
 export type InitialStateT = {
   currentNote: Note | null;
   changed: boolean;
-  draftNote: DraftNote | null;
 };
 
 const initialState: InitialStateT = {
   currentNote: null,
   changed: false,
-  draftNote: null,
 };
 const noteSlice = createSlice({
   name: 'note',

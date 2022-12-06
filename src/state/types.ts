@@ -7,7 +7,7 @@ export type Note = {
   updatedAt: string | Date;
 };
 
-export type DraftNote = Pick<Note, 'content'> & { noteBookId: string };
+export type CreateNewNotePayload = Pick<Note, 'content'>;
 
 export type FavoriteNote = Note & {
   notebookName: string;

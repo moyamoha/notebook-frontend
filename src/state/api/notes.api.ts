@@ -1,7 +1,20 @@
 import axios from 'axios';
-import { getNotesNotebookName } from '../../utils/functions';
-import { setFavorites } from '../slices/data.slice';
-import { AppDispatch, FavoriteNote, IStore, Note } from '../types';
+import { htmlToText } from 'html-to-text';
+import { NavigateFunction } from 'react-router';
+import {
+  getNotesNotebookName,
+  getTwoFirstWords,
+  slugify,
+} from '../../utils/functions';
+import { addNoteToNotebook, setFavorites } from '../slices/data.slice';
+import { setCurrentNote } from '../slices/note.slice';
+import {
+  AppDispatch,
+  CreateNewNotePayload,
+  FavoriteNote,
+  IStore,
+  Note,
+} from '../types';
 
 export function deleteNote() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
@@ -60,5 +73,28 @@ export function removeFromFavorites(noteId: string) {
       localStorage.setItem('favorites', JSON.stringify(favorites));
       dispatch(setFavorites(favorites));
     }
+  };
+}
+
+export function createNewNote(
+  note: CreateNewNotePayload,
+  navigate: NavigateFunction,
+) {
+  return async (dispatch: AppDispatch, getState: () => IStore) => {
+    const notebook = getState().data.currentNotebook;
+    try {
+      if (!notebook) {
+        return;
+      }
+      const response = await axios.post(`/notes/${notebook._id}`, note);
+      dispatch(
+        addNoteToNotebook({ notebookId: notebook._id, note: response.data }),
+      );
+      dispatch(setCurrentNote(response.data));
+      const noteNameSlugified = `${slugify(
+        getTwoFirstWords(htmlToText(response.data.content)),
+      )}`;
+      navigate(`/${slugify(notebook.name)}`);
+    } catch (error) {}
   };
 }

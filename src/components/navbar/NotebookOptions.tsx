@@ -36,7 +36,7 @@ export default function NotebookOptions({ notebook }: { notebook: Notebook }) {
 
   const handleRemoveNotebook = () => {
     if (window.confirm(`Delete ${notebook.name}?`)) {
-      dispatch(deleteNotebook(notebook._id));
+      dispatch(deleteNotebook(notebook._id, navigate));
     }
   };
   return (
@@ -58,10 +58,3 @@ export default function NotebookOptions({ notebook }: { notebook: Notebook }) {
     </>
   );
 }
-
-const transitionStyles = {
-  entering: { opacity: 1 },
-  entered: { opacity: 1 },
-  exiting: { opacity: 0 },
-  exited: { opacity: 0 },
-};

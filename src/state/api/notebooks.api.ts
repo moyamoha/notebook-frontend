@@ -28,18 +28,25 @@ export function getNotebooks(navigate: NavigateFunction) {
   };
 }
 
-export function deleteNotebook(notebookId: string) {
+export function deleteNotebook(notebookId: string, navigate: NavigateFunction) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     try {
       await axios.delete(`/notebooks/${notebookId}`);
       dispatch(removeNotebook(notebookId));
+      const notebooks = getState().data.notebooks;
+      if (notebooks.length > 0) {
+        dispatch(setCurrentNotebook(notebooks[0]));
+        navigate(`/${slugify(notebooks[0].name)}`);
+      } else {
+        navigate('/');
+      }
     } catch (error: any) {
       dispatch(setError(error.message));
     }
   };
 }
 
-export function editNotebookName(name: string) {
+export function editNotebookName(name: string, navigate: NavigateFunction) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     try {
       const notebook = getState().data.currentNotebook;
@@ -50,6 +57,7 @@ export function editNotebookName(name: string) {
       const notebookId = notebook._id;
       await axios.patch(`/notebooks/rename/${notebookId}`, { name });
       dispatch(renameNotebook({ id: notebookId, name: name }));
+      navigate(`/${slugify(name)}`);
     } catch (error: any) {
       dispatch(setError(error.message));
     }

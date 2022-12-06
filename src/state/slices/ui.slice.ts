@@ -16,16 +16,18 @@ type InitialStateT = {
   loginButtonLoading: boolean;
   signupBtnLoading: boolean;
   isEditingExistingNotebook: boolean;
+  isEditingNote: boolean;
 };
 
 const initialState: InitialStateT = {
   error: '',
   activeNav: 'scratch_pad',
-  isCreatingNew: false,
+  isCreatingNew: false, // refers to if it is creating new notebook
   isEditingExistingNotebook: false,
   expandNotebooks: true,
   loginButtonLoading: false,
   signupBtnLoading: false,
+  isEditingNote: false,
 };
 
 const uiSlice = createSlice({
@@ -52,6 +54,9 @@ const uiSlice = createSlice({
     },
     setIsEditingExistingNotebook: (state, action: PayloadAction<boolean>) => {
       state.isEditingExistingNotebook = action.payload;
+    },
+    setIsEditingNote: (state, action: PayloadAction<boolean>) => {
+      state.isEditingNote = action.payload;
     },
   },
 });

@@ -12,12 +12,7 @@ type NoteListPropsType = {
   showNotebookName: boolean;
 };
 
-export default function NoteList({
-  notes,
-  canAddNew,
-  showNotebookName,
-}: NoteListPropsType) {
-  // const current = useAppSelector((s) => s.data.currentNotebook);
+export default function NoteList({ notes, canAddNew }: NoteListPropsType) {
   return (
     <div className="note-list">
       {notes.length > 0 ? (
