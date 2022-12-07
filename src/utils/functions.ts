@@ -16,8 +16,6 @@ export const getNotesNotebookName = (
   noteId: string,
 ): string => {
   let res = '';
-  console.log(notebooks);
-  console.log(noteId);
   for (let i = 0; i < notebooks.length; i++) {
     const nb = notebooks[i];
     for (let j = 0; j < nb.notes.length; j++) {
@@ -31,8 +29,6 @@ export const getNotesNotebookName = (
 };
 
 export const dateToPrettyString = (datetime: Date | string) => {
-  // const h = datetime.getHours()
-  // const m = datetime.getMinutes()
   const date = new Date(datetime);
   const time = date.toLocaleTimeString().replaceAll('\\.', '/').substring(0, 5);
   const datePart = date.toLocaleDateString();

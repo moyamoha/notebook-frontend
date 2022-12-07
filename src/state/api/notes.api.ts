@@ -6,7 +6,12 @@ import {
   getTwoFirstWords,
   slugify,
 } from '../../utils/functions';
-import { addNoteToNotebook, setFavorites } from '../slices/data.slice';
+import {
+  addNoteToNotebook,
+  removeNoteFromNotebook,
+  replaceNote,
+  setFavorites,
+} from '../slices/data.slice';
 import { setCurrentNote } from '../slices/note.slice';
 import {
   AppDispatch,
@@ -19,13 +24,21 @@ import {
 export function deleteNote() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     const notebook = getState().data.currentNotebook;
+    const notebooks = getState().data.notebooks;
     const note = getState().note.currentNote as Note;
     try {
       if (!notebook || !note) {
         // SHOW PROPER ERROR MESSAGE
         return;
       }
-      await axios.delete(`/notes/${notebook._id}${note._id}`);
+      await axios.delete(`/notes/${notebook._id}/${note._id}`);
+      console.log('tänne');
+      if (
+        getState().data.favorites.findIndex((f) => f._id === note._id) !== -1
+      ) {
+        dispatch(removeFromFavorites(note._id));
+      }
+      dispatch(removeNoteFromNotebook(note._id));
     } catch (error) {}
   };
 }
@@ -95,6 +108,25 @@ export function createNewNote(
         getTwoFirstWords(htmlToText(response.data.content)),
       )}`;
       navigate(`/${slugify(notebook.name)}`);
+    } catch (error) {}
+  };
+}
+
+export function editExistingNote(newContent: string) {
+  return async (dispatch: AppDispatch, getState: () => IStore) => {
+    const notebook = getState().data.currentNotebook;
+    const note = getState().note.currentNote;
+    console.log('no way');
+    try {
+      if (!notebook || !note) {
+        return;
+      }
+      const response = await axios.put(`/notes/${note._id}`, {
+        content: newContent,
+        updatedAt: new Date(),
+      });
+      dispatch(replaceNote(response.data));
+      dispatch(setCurrentNote(response.data));
     } catch (error) {}
   };
 }

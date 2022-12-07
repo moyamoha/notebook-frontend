@@ -5,20 +5,27 @@ import { formats, module } from './editor-config';
 
 import '../../styles/editor.css';
 import NoteOptions from './NoteOptions';
+import { Note } from '../../state/types';
+import { useAppSelector } from '../../state/hooks';
+import React from 'react';
 
 export default function RichEditor() {
-  const [convertedText, setConvertedText] = useState('');
+  const note = useAppSelector((s) => s.note.currentNote) as Note;
+  const [editorValue, setEditorValue] = useState(note.content);
+  React.useEffect(() => {
+    setEditorValue(note.content);
+  }, [note]);
   return (
     <div className="editor">
       <ReactQuill
         theme="snow"
-        value={convertedText}
-        onChange={setConvertedText}
+        value={editorValue}
+        onChange={setEditorValue}
         formats={formats}
         modules={module}
-        style={{ height: 'calc(100vh - 82px)' }}
+        style={{ height: 'calc(100vh - 82px)', fontSize: '1.2rem' }}
       />
-      <NoteOptions></NoteOptions>
+      <NoteOptions editorValue={editorValue} note={note}></NoteOptions>
     </div>
   );
 }

@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 export default function Notebook() {
   const current = useAppSelector((s) => s.data.currentNotebook);
   const currentNote = useAppSelector((s) => s.note.currentNote);
-  console.log(currentNote);
   return (
     <Layout>
       <NoteList

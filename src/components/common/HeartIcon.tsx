@@ -8,11 +8,12 @@ import '../../styles/note-list.css';
 
 export default function HeartIcon({ note }: { note: Note }) {
   const dispatch = useAppDispatch();
+  const currentNote = useAppSelector((s) => s.note.currentNote);
   const favorites = useAppSelector((s) => s.data.favorites);
-  const isNoteInFavorites = React.useMemo(
-    () => favorites.findIndex((fn) => fn._id === note._id) !== -1,
-    [favorites],
-  );
+
+  const isNoteInFavorites = React.useMemo(() => {
+    return favorites.findIndex((fn) => fn._id === note._id) !== -1;
+  }, [favorites, currentNote]);
 
   const handleHeartClick = () => {
     dispatch(addToFavorites(note));

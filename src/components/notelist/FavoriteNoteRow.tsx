@@ -4,6 +4,7 @@ import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { SlNotebook } from 'react-icons/sl';
 import { addToFavorites, removeFromFavorites } from '../../state/api/notes.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { setCurrentNote } from '../../state/slices/note.slice';
 import { FavoriteNote, Note } from '../../state/types';
 import '../../styles/note-list.css';
 import { getNotesNotebookName, getTwoFirstWords } from '../../utils/functions';
@@ -14,13 +15,31 @@ type NoteRowPropsType = {
 
 export default function FavoriteNoteRow({ note }: NoteRowPropsType) {
   const dispatch = useAppDispatch();
+  const currentNote = useAppSelector((s) => s.note.currentNote);
 
   const handleHeartFillClick = () => {
     dispatch(removeFromFavorites(note._id));
   };
 
+  const handleFavoriteClick = () => {
+    const n = {
+      _id: note._id,
+      content: note.content,
+      writer: note.writer,
+      updatedAt: note.updatedAt,
+    };
+    dispatch(setCurrentNote(n));
+  };
+
   return (
-    <div className="note-row">
+    <div
+      className={
+        currentNote && currentNote._id === note._id
+          ? 'note-row selected'
+          : 'note-row'
+      }
+      onClick={handleFavoriteClick}
+    >
       <div
         style={{
           display: 'flex',

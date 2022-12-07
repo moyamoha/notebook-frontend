@@ -12,7 +12,6 @@ export default function FavoritesBtn() {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    console.log(activeNav);
     if (activeNav !== 'favorites') {
       dispatch(setActiveNav('favorites'));
       navigate('/favorites');

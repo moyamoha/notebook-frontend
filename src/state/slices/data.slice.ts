@@ -53,6 +53,26 @@ const dataSlice = createSlice({
       state.notebooks[index].notes.unshift(action.payload.note);
       state.currentNotebook = state.notebooks[index];
     },
+    removeNoteFromNotebook: (state, action: PayloadAction<string>) => {
+      const currNb = state.currentNotebook;
+      if (!currNb) return;
+      const nbIndex = state.notebooks.findIndex((nb) => nb._id === currNb._id);
+      const noteIndex = state.notebooks[nbIndex].notes.findIndex(
+        (n) => n._id === action.payload,
+      );
+      state.notebooks[nbIndex].notes.splice(noteIndex, 1);
+      state.currentNotebook = state.notebooks[nbIndex];
+    },
+    replaceNote: (state, action: PayloadAction<Note>) => {
+      const currNb = state.currentNotebook;
+      if (!currNb) return;
+      const nbIndex = state.notebooks.findIndex((nb) => nb._id === currNb._id);
+      const noteIndex = currNb.notes.findIndex(
+        (n) => n._id === action.payload._id,
+      );
+      state.notebooks[nbIndex].notes[noteIndex] = action.payload;
+      state.currentNotebook = state.notebooks[nbIndex];
+    },
   },
 });
 
@@ -64,5 +84,7 @@ export const {
   renameNotebook,
   setFavorites,
   addNoteToNotebook,
+  removeNoteFromNotebook,
+  replaceNote,
 } = dataSlice.actions;
 export default dataSlice.reducer;

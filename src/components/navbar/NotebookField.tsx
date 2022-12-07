@@ -21,7 +21,6 @@ export default function NotebookField() {
 
   const handleBlur = () => {
     if (name === current?.name) {
-      console.log('tänne');
       dispatch(setIsEditingExistingNotebook(false));
     } else {
       return;

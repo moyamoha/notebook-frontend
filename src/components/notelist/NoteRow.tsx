@@ -7,14 +7,29 @@ import { Note } from '../../state/types';
 import { getTwoFirstWords } from '../../utils/functions';
 import '../../styles/note-list.css';
 import HeartIcon from '../common/HeartIcon';
+import { setCurrentNote } from '../../state/slices/note.slice';
 
 type NoteRowPropsType = {
   note: Note;
 };
 
 export default function NoteRow({ note }: NoteRowPropsType) {
+  const currentNote = useAppSelector((s) => s.note.currentNote);
+  const dispatch = useAppDispatch();
+
+  const handleNoteClick = () => {
+    dispatch(setCurrentNote(note));
+  };
+
   return (
-    <div className="note-row">
+    <div
+      className={
+        currentNote && currentNote._id === note._id
+          ? 'note-row selected'
+          : 'note-row'
+      }
+      onClick={handleNoteClick}
+    >
       <span>
         {note.content ? getTwoFirstWords(htmlToText(note.content)) : 'new note'}
       </span>
