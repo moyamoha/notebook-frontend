@@ -6,9 +6,9 @@ import {
   removeNotebook,
   renameNotebook,
   setCurrentNotebook,
-  setFavorites,
   setNotebooks,
 } from '../slices/data.slice';
+import { setCurrentNote } from '../slices/note.slice';
 import { setError, setIsEditingExistingNotebook } from '../slices/ui.slice';
 import { AppDispatch, IStore, Note, Notebook } from '../types';
 
@@ -19,6 +19,9 @@ export function getNotebooks(navigate: NavigateFunction) {
       const notebooks = response.data as Notebook[];
       if (notebooks.length > 0) {
         dispatch(setCurrentNotebook(notebooks[0]));
+        if (notebooks[0].notes.length > 0) {
+          dispatch(setCurrentNote(notebooks[0].notes[0]));
+        }
         navigate(`/${slugify(notebooks[0].name)}`);
       }
       dispatch(setNotebooks(notebooks));
@@ -36,8 +39,13 @@ export function deleteNotebook(notebookId: string, navigate: NavigateFunction) {
       const notebooks = getState().data.notebooks;
       if (notebooks.length > 0) {
         dispatch(setCurrentNotebook(notebooks[0]));
+        if (notebooks[0].notes.length) {
+          dispatch(setCurrentNote(notebooks[0].notes[0]));
+        }
         navigate(`/${slugify(notebooks[0].name)}`);
       } else {
+        dispatch(setCurrentNote(null));
+        dispatch(setCurrentNotebook(null));
         navigate('/');
       }
     } catch (error: any) {
