@@ -27,12 +27,13 @@ export function login(
   };
 }
 
-export function signup(user: NewUser) {
+export function signup(user: NewUser, navigate: NavigateFunction) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     try {
       dispatch(setSignupBtnLoading(true));
       const res = await axios.post('/auth/signup', user);
       dispatch(setSignupBtnLoading(false));
+      navigate('/login');
     } catch (error: any) {
       dispatch(setError(error.message));
     }

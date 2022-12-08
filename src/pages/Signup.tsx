@@ -35,12 +35,15 @@ export default function Signup() {
       return;
     }
     dispatch(
-      signup({
-        email: formData.email,
-        firstname: formData.firstname,
-        lastname: formData.lastname,
-        password: formData.password1,
-      }),
+      signup(
+        {
+          email: formData.email,
+          firstname: formData.firstname,
+          lastname: formData.lastname,
+          password: formData.password1,
+        },
+        navigate,
+      ),
     );
   };
   return (
