@@ -5,7 +5,6 @@ export type IActiveNav =
   | 'new_note'
   | 'scratch_pad'
   | 'favorites'
-  | 'settings'
   | 'all_notes';
 
 type InitialStateT = {
@@ -17,6 +16,7 @@ type InitialStateT = {
   signupBtnLoading: boolean;
   isEditingExistingNotebook: boolean;
   isEditingNote: boolean;
+  showSettingsModal: boolean;
 };
 
 const initialState: InitialStateT = {
@@ -28,6 +28,7 @@ const initialState: InitialStateT = {
   loginButtonLoading: false,
   signupBtnLoading: false,
   isEditingNote: false,
+  showSettingsModal: false,
 };
 
 const uiSlice = createSlice({
@@ -58,6 +59,9 @@ const uiSlice = createSlice({
     setIsEditingNote: (state, action: PayloadAction<boolean>) => {
       state.isEditingNote = action.payload;
     },
+    setShowSettingsModal: (state, action: PayloadAction<boolean>) => {
+      state.showSettingsModal = action.payload;
+    },
   },
 });
 
@@ -69,5 +73,6 @@ export const {
   setLoginButtonLoading,
   setSignupBtnLoading,
   setIsEditingExistingNotebook,
+  setShowSettingsModal,
 } = uiSlice.actions;
 export default uiSlice.reducer;

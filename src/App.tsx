@@ -1,21 +1,22 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import './App.css';
-import RichEditor from './components/editor/RichEditor';
-import Layout from './components/layout/Layout';
-import NoteList from './components/notelist/NoteList';
 import Login from './pages/Login';
 import { Navigate, Route, Routes } from 'react-router';
+
 import { useAppSelector } from './state/hooks';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Notebook from './pages/Notebook';
 import Favorites from './pages/Favorites';
+import SettingsModal from './components/settings/SettingsModal';
+
+import './App.css';
 
 function App() {
   const user = useAppSelector((s) => s.user.current);
+  const showSettings = useAppSelector((s) => s.ui.showSettingsModal);
+
   return (
     <div className="App">
+      <SettingsModal></SettingsModal>
       <Routes>
         <Route
           path="/"

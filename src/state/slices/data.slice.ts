@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getNoteIndex } from '../../utils/functions';
 import { FavoriteNote, Note, Notebook } from '../types';
 
 export type InitialStateT = {
@@ -67,9 +68,7 @@ const dataSlice = createSlice({
       const currNb = state.currentNotebook;
       if (!currNb) return;
       const nbIndex = state.notebooks.findIndex((nb) => nb._id === currNb._id);
-      const noteIndex = currNb.notes.findIndex(
-        (n) => n._id === action.payload._id,
-      );
+      const noteIndex = getNoteIndex(currNb, action.payload._id);
       state.notebooks[nbIndex].notes[noteIndex] = action.payload;
       state.currentNotebook = state.notebooks[nbIndex];
     },

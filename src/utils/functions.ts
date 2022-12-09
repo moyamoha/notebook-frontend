@@ -1,4 +1,4 @@
-import { Notebook } from '../state/types';
+import { Note, Notebook } from '../state/types';
 
 export const slugify = (text: string): string => {
   return text
@@ -33,4 +33,12 @@ export const dateToPrettyString = (datetime: Date | string) => {
   const time = date.toLocaleTimeString().replaceAll('\\.', '/').substring(0, 5);
   const datePart = date.toLocaleDateString();
   return `${time} on ${datePart}`;
+};
+
+export const noteIsFavorite = (favorites: Note[], note: Note) => {
+  return favorites.findIndex((f) => f._id === note._id) !== -1;
+};
+
+export const getNoteIndex = (notebook: Notebook, noteId: string): number => {
+  return notebook.notes.findIndex((n) => n._id === noteId);
 };

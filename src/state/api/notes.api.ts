@@ -4,6 +4,7 @@ import { NavigateFunction } from 'react-router';
 import {
   getNotesNotebookName,
   getTwoFirstWords,
+  noteIsFavorite,
   slugify,
 } from '../../utils/functions';
 import {
@@ -33,12 +34,13 @@ export function deleteNote() {
       }
       await axios.delete(`/notes/${notebook._id}/${note._id}`);
       console.log('tänne');
-      if (
-        getState().data.favorites.findIndex((f) => f._id === note._id) !== -1
-      ) {
+      if (noteIsFavorite(getState().data.favorites, note)) {
         dispatch(removeFromFavorites(note._id));
       }
       dispatch(removeNoteFromNotebook(note._id));
+      if (getState().data.currentNotebook?.notes.length === 0) {
+        dispatch(setCurrentNote(null));
+      }
     } catch (error) {}
   };
 }
@@ -104,9 +106,6 @@ export function createNewNote(
         addNoteToNotebook({ notebookId: notebook._id, note: response.data }),
       );
       dispatch(setCurrentNote(response.data));
-      const noteNameSlugified = `${slugify(
-        getTwoFirstWords(htmlToText(response.data.content)),
-      )}`;
       navigate(`/${slugify(notebook.name)}`);
     } catch (error) {}
   };

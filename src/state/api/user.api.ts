@@ -17,7 +17,7 @@ export function login(
     try {
       dispatch(setLoginButtonLoading(true));
       const res = await axios.post('/auth/login', credintials);
-      dispatch(setLoginButtonLoading(true));
+      dispatch(setLoginButtonLoading(false));
       const token = res.data.access_token;
       const decodedToken = jwtDecode(token);
       localStorage.setItem('accessToken', token);
@@ -52,5 +52,12 @@ export function deleteUser() {
     } catch (error: any) {
       dispatch(setError(error.message));
     }
+  };
+}
+
+export function logout() {
+  return (dispatch: AppDispatch, getState: () => IStore) => {
+    localStorage.clear();
+    dispatch(setUser(null));
   };
 }

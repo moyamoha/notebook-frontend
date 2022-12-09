@@ -1,0 +1,44 @@
+.settings-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #333;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  height: 50%;
+  border-radius: 10px;
+  border: 2px solid orange;
+  color: white;
+  min-width: 40%;
+}
+
+.settings-header {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border-bottom: 1px solid #ddd;
+}
+
+.settings-btn {
+  color: whitesmoke;
+  background-color: #ffb120;
+}
+
+.settings-btn:hover {
+  background-color: #f0a110;
+}
+
+.settings-main {
+  display: flex;
+  margin: 15px;
+  gap: 40px;
+}
+
+.modal-close-icon {
+  cursor: pointer;
+}
+
+.modal-close-icon:hover {
+  background-color: black;
+}
