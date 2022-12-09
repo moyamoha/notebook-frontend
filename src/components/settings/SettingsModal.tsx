@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import Modal from 'react-modal';
 import { logout } from '../../state/api/user.api';
@@ -5,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setShowSettingsModal } from '../../state/slices/ui.slice';
 
 import '../../styles/settings.css';
+import { navItems, SettingsNavItem } from './nav-items';
 import SettingsHeader from './SettingsHeader';
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
@@ -14,16 +16,13 @@ export default function SettingsModal() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((s) => s.user.current);
   const showSettingsModal = useAppSelector((s) => s.ui.showSettingsModal);
+  const [selected, setSelected] = React.useState<SettingsNavItem>(navItems[0]);
 
   useEffect(() => {
     if (!user) {
       dispatch(logout());
     }
   }, [user]);
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
 
   function afterOpenModal() {}
 
@@ -40,8 +39,22 @@ export default function SettingsModal() {
     >
       <SettingsHeader></SettingsHeader>
       <section className="settings-main">
-        <section className="settings-nav"></section>
-        <section className="settings-body"></section>
+        <section className="settings-nav">
+          {navItems.map((ni) => (
+            <div
+              className={
+                selected.value === ni.value
+                  ? 'settings-nav-item selected'
+                  : 'settings-nav-item'
+              }
+              key={ni.value}
+              onClick={() => setSelected(ni)}
+            >
+              {ni.text}
+            </div>
+          ))}
+        </section>
+        <section className="settings-body">{selected.element}</section>
       </section>
     </Modal>
   );

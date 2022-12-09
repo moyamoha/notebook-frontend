@@ -10,6 +10,7 @@ export default function SettingsHeader() {
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(setShowSettingsModal(false));
   };
 
   const handleCloseModal = () => {
