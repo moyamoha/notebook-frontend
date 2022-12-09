@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function AccountSettings() {
   return (
-    <div style={{ overflowY: 'scroll' }}>
+    <div>
       <h4 style={{ marginTop: '0' }}>Account Settings</h4>
       <h5 style={{ margin: 0, marginBottom: '1rem' }}>Remove account</h5>
       <p style={{ color: '#FFD93D' }}>
