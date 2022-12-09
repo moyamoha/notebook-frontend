@@ -12,7 +12,7 @@ import {
   replaceNote,
   setFavorites,
 } from '../slices/data.slice';
-import { setCurrentNote } from '../slices/note.slice';
+import { setCurrentNote, setEdited } from '../slices/note.slice';
 import {
   AppDispatch,
   CreateNewNotePayload,
@@ -49,7 +49,7 @@ export function getFavorites() {
     if (!favsString) {
       localStorage.setItem('favorites', JSON.stringify([]));
     } else {
-      const favorites: FavoriteNote[] = JSON.parse(favsString);
+      const favorites: Note[] = JSON.parse(favsString);
       dispatch(setFavorites(favorites));
     }
   };
@@ -116,7 +116,6 @@ export function editExistingNote(newContent: string) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     const notebook = getState().data.currentNotebook;
     const note = getState().note.currentNote;
-    console.log('no way');
     try {
       if (!notebook || !note) {
         return;

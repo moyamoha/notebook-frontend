@@ -10,11 +10,12 @@ import '../../styles/note-list.css';
 import { getNotesNotebookName, getTwoFirstWords } from '../../utils/functions';
 
 type NoteRowPropsType = {
-  note: FavoriteNote;
+  note: Note;
 };
 
 export default function FavoriteNoteRow({ note }: NoteRowPropsType) {
   const dispatch = useAppDispatch();
+  const notebooks = useAppSelector((s) => s.data.notebooks);
   const currentNote = useAppSelector((s) => s.note.currentNote);
 
   const handleHeartFillClick = () => {
@@ -22,13 +23,7 @@ export default function FavoriteNoteRow({ note }: NoteRowPropsType) {
   };
 
   const handleFavoriteClick = () => {
-    const n = {
-      _id: note._id,
-      content: note.content,
-      writer: note.writer,
-      updatedAt: note.updatedAt,
-    };
-    dispatch(setCurrentNote(n));
+    dispatch(setCurrentNote(note));
   };
 
   return (
@@ -56,7 +51,7 @@ export default function FavoriteNoteRow({ note }: NoteRowPropsType) {
           }}
         >
           <SlNotebook size={15}></SlNotebook>
-          <span>{note.notebookName}</span>
+          <span>{getNotesNotebookName(notebooks, note._id)}</span>
         </div>
       </div>
 

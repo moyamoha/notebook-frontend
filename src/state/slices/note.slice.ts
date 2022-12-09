@@ -3,19 +3,19 @@ import { Note } from '../types';
 
 export type InitialStateT = {
   currentNote: Note | null;
-  changed: boolean;
+  edited: boolean;
 };
 
 const initialState: InitialStateT = {
   currentNote: null,
-  changed: false,
+  edited: false,
 };
 const noteSlice = createSlice({
   name: 'note',
   initialState: initialState,
   reducers: {
-    setChanged: (state, action: PayloadAction<boolean>) => {
-      state.changed = action.payload;
+    setEdited: (state, action: PayloadAction<boolean>) => {
+      state.edited = action.payload;
     },
     setCurrentNote: (state, action: PayloadAction<Note | null>) => {
       state.currentNote = action.payload;
@@ -23,5 +23,5 @@ const noteSlice = createSlice({
   },
 });
 
-export const { setCurrentNote, setChanged } = noteSlice.actions;
+export const { setCurrentNote, setEdited } = noteSlice.actions;
 export default noteSlice.reducer;

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type IActiveNave =
+export type IActiveNav =
   | ''
   | 'new_note'
   | 'scratch_pad'
@@ -10,7 +10,7 @@ type IActiveNave =
 
 type InitialStateT = {
   error: string;
-  activeNav: IActiveNave;
+  activeNav: IActiveNav;
   isCreatingNew: boolean;
   expandNotebooks: boolean;
   loginButtonLoading: boolean;
@@ -37,7 +37,7 @@ const uiSlice = createSlice({
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
-    setActiveNav: (state, action: PayloadAction<IActiveNave>) => {
+    setActiveNav: (state, action: PayloadAction<IActiveNav>) => {
       state.activeNav = action.payload;
     },
     setIsCreatingNew: (state, action: PayloadAction<boolean>) => {

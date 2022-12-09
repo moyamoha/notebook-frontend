@@ -1,11 +1,11 @@
-import { FavoriteNote } from '../../state/types';
+import { FavoriteNote, Note } from '../../state/types';
 import NotelistPlaceholder from './NotelistPlaceholder';
 import FavoriteNoteRow from './FavoriteNoteRow';
 
 import '../../styles/note-list.css';
 
 type NoteListPropsType = {
-  notes: FavoriteNote[];
+  notes: Note[];
 };
 
 export default function FavoritesList({ notes }: NoteListPropsType) {

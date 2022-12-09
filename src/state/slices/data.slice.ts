@@ -3,7 +3,7 @@ import { FavoriteNote, Note, Notebook } from '../types';
 
 export type InitialStateT = {
   notebooks: Notebook[];
-  favorites: FavoriteNote[];
+  favorites: Note[];
   currentNotebook: Notebook | null;
 };
 
@@ -19,7 +19,7 @@ const dataSlice = createSlice({
     setNotebooks: (state, action: PayloadAction<Notebook[]>) => {
       state.notebooks = action.payload;
     },
-    setFavorites: (state, action: PayloadAction<FavoriteNote[]>) => {
+    setFavorites: (state, action: PayloadAction<Note[]>) => {
       state.favorites = action.payload;
     },
     removeNotebook: (state, action: PayloadAction<string>) => {

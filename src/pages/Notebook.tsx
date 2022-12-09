@@ -5,19 +5,20 @@ import Layout from '../components/layout/Layout';
 import NoteList from '../components/notelist/NoteList';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { setCurrentNote } from '../state/slices/note.slice';
+import { slugify } from '../utils/functions';
 
 export default function Notebook() {
   const current = useAppSelector((s) => s.data.currentNotebook);
   const currentNote = useAppSelector((s) => s.note.currentNote);
+  const activeNav = useAppSelector((s) => s.ui.activeNav);
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
+    if (!current) return;
     dispatch(
-      setCurrentNote(
-        current && current.notes.length > 0 ? current.notes[0] : null,
-      ),
+      setCurrentNote(current.notes.length > 0 ? current.notes[0] : null),
     );
-  }, [current]);
+  }, [activeNav]);
 
   return (
     <Layout>
