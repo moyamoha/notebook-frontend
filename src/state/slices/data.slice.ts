@@ -72,6 +72,7 @@ const dataSlice = createSlice({
       state.notebooks[nbIndex].notes[noteIndex] = action.payload;
       state.currentNotebook = state.notebooks[nbIndex];
     },
+    resetData: () => initialState,
   },
 });
 
@@ -85,5 +86,6 @@ export const {
   addNoteToNotebook,
   removeNoteFromNotebook,
   replaceNote,
+  resetData,
 } = dataSlice.actions;
 export default dataSlice.reducer;

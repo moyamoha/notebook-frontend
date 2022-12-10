@@ -1,5 +1,5 @@
 import Login from './pages/Login';
-import { Navigate, Route, Routes } from 'react-router';
+import { Navigate, Route, Routes, useNavigate } from 'react-router';
 
 import { useAppSelector } from './state/hooks';
 import Home from './pages/Home';
@@ -9,10 +9,19 @@ import Favorites from './pages/Favorites';
 import SettingsModal from './components/settings/SettingsModal';
 
 import './App.css';
+import React from 'react';
 
 function App() {
   const user = useAppSelector((s) => s.user.current);
-  const showSettings = useAppSelector((s) => s.ui.showSettingsModal);
+  const goto = useNavigate();
+
+  React.useEffect(() => {
+    console.log('useEffect in app component');
+    if (!user) {
+      localStorage.removeItem('accessToken');
+      goto('/login');
+    }
+  }, [user]);
 
   return (
     <div className="App">

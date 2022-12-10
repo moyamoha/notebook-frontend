@@ -62,6 +62,7 @@ const uiSlice = createSlice({
     setShowSettingsModal: (state, action: PayloadAction<boolean>) => {
       state.showSettingsModal = action.payload;
     },
+    resetUi: () => initialState,
   },
 });
 
@@ -74,5 +75,6 @@ export const {
   setSignupBtnLoading,
   setIsEditingExistingNotebook,
   setShowSettingsModal,
+  resetUi,
 } = uiSlice.actions;
 export default uiSlice.reducer;

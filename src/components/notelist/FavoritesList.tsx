@@ -9,7 +9,6 @@ type NoteListPropsType = {
 };
 
 export default function FavoritesList({ notes }: NoteListPropsType) {
-  // const current = useAppSelector((s) => s.data.currentNotebook);
   return (
     <div className="note-list">
       {notes.length > 0 ? (

@@ -13,7 +13,7 @@ import {
   replaceNote,
   setFavorites,
 } from '../slices/data.slice';
-import { setCurrentNote, setEdited } from '../slices/note.slice';
+import { setCurrentNote } from '../slices/note.slice';
 import {
   AppDispatch,
   CreateNewNotePayload,
@@ -48,7 +48,9 @@ export function deleteNote() {
 export function getFavorites() {
   return (dispatch: AppDispatch, getState: () => IStore) => {
     const favsString = localStorage.getItem('favorites');
+    console.log(favsString);
     if (!favsString) {
+      console.log('tuli tänne');
       localStorage.setItem('favorites', JSON.stringify([]));
     } else {
       const favorites: Note[] = JSON.parse(favsString);

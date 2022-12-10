@@ -2,7 +2,6 @@ import { BsTrash } from 'react-icons/bs';
 import { GrUpdate } from 'react-icons/gr';
 import { deleteNote, editExistingNote } from '../../state/api/notes.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { setEdited } from '../../state/slices/note.slice';
 import { Note } from '../../state/types';
 import { dateToPrettyString } from '../../utils/functions';
 import HeartIcon from '../common/HeartIcon';
@@ -29,7 +28,6 @@ export default function NoteOptions({
 
   const handleSaveNote = () => {
     dispatch(editExistingNote(editorValue));
-    dispatch(setEdited(true));
   };
 
   return (

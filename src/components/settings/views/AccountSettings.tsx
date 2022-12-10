@@ -9,7 +9,9 @@ export default function AccountSettings() {
       'Are you sure? This action is too dangerous, you will lose all your data!!!',
     );
     if (confirm) {
+      console.log('Should work now ffs');
       dispatch(deleteUserAccount());
+      // dispatch(setShowSettingsModal(false));
     }
   };
 

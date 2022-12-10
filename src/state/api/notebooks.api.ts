@@ -9,8 +9,8 @@ import {
   setNotebooks,
 } from '../slices/data.slice';
 import { setCurrentNote } from '../slices/note.slice';
-import { setError, setIsEditingExistingNotebook } from '../slices/ui.slice';
-import { AppDispatch, IStore, Note, Notebook } from '../types';
+import { setError } from '../slices/ui.slice';
+import { AppDispatch, IStore, Notebook } from '../types';
 
 export function getNotebooks(navigate: NavigateFunction) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {

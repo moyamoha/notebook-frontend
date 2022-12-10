@@ -5,10 +5,13 @@ import { NavigateFunction } from 'react-router';
 import { AppDispatch, IStore, IUser, NewUser } from '../types';
 import { setUser } from '../slices/user.slice';
 import {
+  resetUi,
   setError,
   setLoginButtonLoading,
   setSignupBtnLoading,
 } from '../slices/ui.slice';
+import { resetData, setNotebooks } from '../slices/data.slice';
+import { setCurrentNote } from '../slices/note.slice';
 
 export function login(
   credintials: { password: string; email: string },
@@ -50,14 +53,16 @@ export function signup(user: NewUser, navigate: NavigateFunction) {
 export function deleteUserAccount() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     try {
+      console.log('Why?');
       const user = getState().user.current;
       if (!user) {
         // SHOW PROPER ERROR MESSAGE
         return;
       }
       await axios.delete('/users/delete-account');
-      localStorage.clear();
-      dispatch(setUser(null));
+      console.log('Why2?');
+      window.localStorage.clear();
+      dispatch(resetStore());
     } catch (error: any) {
       dispatch(setError(error.message));
     }
@@ -65,8 +70,18 @@ export function deleteUserAccount() {
 }
 
 export function logout() {
+  console.log('logout function');
   return (dispatch: AppDispatch, getState: () => IStore) => {
-    localStorage.clear();
+    window.localStorage.removeItem('accessToken');
+    dispatch(resetStore());
+  };
+}
+
+export function resetStore() {
+  return (dispatch: AppDispatch, getState: () => IStore) => {
     dispatch(setUser(null));
+    dispatch(resetUi());
+    dispatch(setCurrentNote(null));
+    dispatch(resetData());
   };
 }

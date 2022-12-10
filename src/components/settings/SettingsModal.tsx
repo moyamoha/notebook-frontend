@@ -9,27 +9,24 @@ import SettingView from './views/Index';
 import '../../styles/settings.css';
 import { navItems, SettingsNavItem } from './nav-items';
 import SettingsHeader from './SettingsHeader';
+import App from '../../App';
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 // Modal.setAppElement('.App');
 
 export default function SettingsModal() {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((s) => s.user.current);
+  // const user = useAppSelector((s) => s.user.current);
   const showSettingsModal = useAppSelector((s) => s.ui.showSettingsModal);
   const [selected, setSelected] = React.useState<SettingsNavItem>(navItems[0]);
-
-  useEffect(() => {
-    if (!user) {
-      dispatch(logout());
-    }
-  }, [user]);
 
   function afterOpenModal() {}
 
   function closeModal() {
-    dispatch(setShowSettingsModal(false));
+    // dispatch(setShowSettingsModal(false));
   }
+
+  Modal.setAppElement('#root');
 
   return (
     <Modal

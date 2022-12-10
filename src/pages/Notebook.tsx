@@ -3,6 +3,7 @@ import EditorPlaceholder from '../components/editor/EditorPlaceholder';
 import RichEditor from '../components/editor/RichEditor';
 import Layout from '../components/layout/Layout';
 import NoteList from '../components/notelist/NoteList';
+import useLogoutIfUserNull from '../hooks/useLogoutIfUserNull';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { setCurrentNote } from '../state/slices/note.slice';
 import { slugify } from '../utils/functions';
