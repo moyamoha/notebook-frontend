@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { logout } from '../../state/api/user.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setShowSettingsModal } from '../../state/slices/ui.slice';
+import SettingView from './views/Index';
 
 import '../../styles/settings.css';
 import { navItems, SettingsNavItem } from './nav-items';
@@ -54,7 +55,9 @@ export default function SettingsModal() {
             </div>
           ))}
         </section>
-        <section className="settings-body">{selected.element}</section>
+        <section className="settings-body">
+          <SettingView viewName={selected.value}></SettingView>
+        </section>
       </section>
     </Modal>
   );

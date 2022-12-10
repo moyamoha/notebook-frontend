@@ -40,7 +40,7 @@ export function signup(user: NewUser, navigate: NavigateFunction) {
   };
 }
 
-export function deleteUser() {
+export function deleteUserAccount() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     try {
       const user = getState().user.current;
@@ -48,7 +48,8 @@ export function deleteUser() {
         // SHOW PROPER ERROR MESSAGE
         return;
       }
-      await axios.delete('/users');
+      await axios.delete('/users/delete-account');
+      dispatch(logout());
     } catch (error: any) {
       dispatch(setError(error.message));
     }
