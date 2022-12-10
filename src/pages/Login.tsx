@@ -3,6 +3,7 @@ import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import EmailInput from '../components/forms/EmailInput';
+import ErrorAlert from '../components/forms/ErrorAlert';
 import PasswordInput from '../components/forms/PasswordInput';
 import { login } from '../state/api/user.api';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
@@ -43,6 +44,7 @@ export default function Login() {
             Sign up here
           </Link>
         </p>
+        <ErrorAlert></ErrorAlert>
       </form>
     </div>
   );

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setError } from '../../state/slices/ui.slice';
 

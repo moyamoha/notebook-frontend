@@ -23,8 +23,12 @@ export function login(
       const decodedToken = jwtDecode(token);
       localStorage.setItem('accessToken', token);
       dispatch(setUser(decodedToken as IUser));
+      dispatch(setError(''));
       navigateFunc('/');
-    } catch (error) {}
+    } catch (error: any) {
+      dispatch(setLoginButtonLoading(false));
+      dispatch(setError(error.response.data.message));
+    }
   };
 }
 
@@ -34,9 +38,11 @@ export function signup(user: NewUser, navigate: NavigateFunction) {
       dispatch(setSignupBtnLoading(true));
       const res = await axios.post('/auth/signup', user);
       dispatch(setSignupBtnLoading(false));
+      dispatch(setError(''));
       navigate('/login');
     } catch (error: any) {
-      dispatch(setError(error.message));
+      setSignupBtnLoading(false);
+      dispatch(setError(error.response.data.message));
     }
   };
 }
@@ -50,7 +56,8 @@ export function deleteUserAccount() {
         return;
       }
       await axios.delete('/users/delete-account');
-      dispatch(logout());
+      localStorage.clear();
+      dispatch(setUser(null));
     } catch (error: any) {
       dispatch(setError(error.message));
     }
