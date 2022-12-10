@@ -1,13 +1,14 @@
 import axios from 'axios';
-import { AppDispatch, IStore, IUser, NewUser } from '../types';
 import jwtDecode from 'jwt-decode';
+import { NavigateFunction } from 'react-router';
+
+import { AppDispatch, IStore, IUser, NewUser } from '../types';
 import { setUser } from '../slices/user.slice';
 import {
   setError,
   setLoginButtonLoading,
   setSignupBtnLoading,
 } from '../slices/ui.slice';
-import { NavigateFunction } from 'react-router';
 
 export function login(
   credintials: { password: string; email: string },
