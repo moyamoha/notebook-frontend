@@ -2,6 +2,7 @@ import axios from 'axios';
 import { htmlToText } from 'html-to-text';
 import { NavigateFunction } from 'react-router';
 import {
+  getNoteIndex,
   getNotesNotebook,
   noteIsFavorite,
   slugify,
@@ -33,7 +34,7 @@ export function deleteNote() {
       }
       await axios.delete(`/notes/${notebook._id}/${note._id}`);
       console.log('tänne');
-      if (noteIsFavorite(getState().data.favorites, note)) {
+      if (noteIsFavorite(getState().data.favorites, note._id)) {
         dispatch(removeFromFavorites(note._id));
       }
       dispatch(removeNoteFromNotebook(note._id));
@@ -116,6 +117,7 @@ export function editExistingNote(newContent: string) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     const notebook = getState().data.currentNotebook;
     const note = getState().note.currentNote;
+    const favorites = getState().data.favorites;
     try {
       if (!notebook || !note) {
         return;
@@ -124,8 +126,13 @@ export function editExistingNote(newContent: string) {
         content: newContent,
         updatedAt: new Date(),
       });
-      dispatch(replaceNote(response.data));
-      dispatch(setCurrentNote(response.data));
+      const editedNote = response.data;
+      dispatch(replaceNote(editedNote));
+      if (noteIsFavorite(favorites, editedNote._id)) {
+        const fIndex = favorites.findIndex((f) => f._id === editedNote._id);
+        favorites[fIndex] = editedNote;
+      }
+      dispatch(setCurrentNote(editedNote));
     } catch (error) {}
   };
 }

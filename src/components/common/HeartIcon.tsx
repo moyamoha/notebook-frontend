@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { Note } from '../../state/types';
 
 import '../../styles/note-list.css';
+import { noteIsFavorite } from '../../utils/functions';
 
 export default function HeartIcon({ note }: { note: Note }) {
   const dispatch = useAppDispatch();
@@ -12,7 +13,7 @@ export default function HeartIcon({ note }: { note: Note }) {
   const favorites = useAppSelector((s) => s.data.favorites);
 
   const isNoteInFavorites = React.useMemo(() => {
-    return favorites.findIndex((fn) => fn._id === note._id) !== -1;
+    return noteIsFavorite(favorites, note._id);
   }, [favorites, currentNote]);
 
   const handleHeartClick = () => {

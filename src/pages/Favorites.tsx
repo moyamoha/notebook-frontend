@@ -15,7 +15,7 @@ export default function Notebook() {
   const favorites = useAppSelector((s) => s.data.favorites);
   const notebooks = useAppSelector((s) => s.data.notebooks);
   const currentNote = useAppSelector((s) => s.note.currentNote);
-  const user = useAppSelector((s) => s.user.current);
+  // const user = useAppSelector((s) => s.user.current);
 
   React.useEffect(() => {
     if (favorites.length > 0) {

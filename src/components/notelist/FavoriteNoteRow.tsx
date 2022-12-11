@@ -4,6 +4,7 @@ import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { SlNotebook } from 'react-icons/sl';
 import { addToFavorites, removeFromFavorites } from '../../state/api/notes.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { setCurrentNotebook } from '../../state/slices/data.slice';
 import { setCurrentNote } from '../../state/slices/note.slice';
 import { FavoriteNote, Note } from '../../state/types';
 import '../../styles/note-list.css';
@@ -24,6 +25,7 @@ export default function FavoriteNoteRow({ note }: NoteRowPropsType) {
 
   const handleFavoriteClick = () => {
     dispatch(setCurrentNote(note));
+    dispatch(setCurrentNotebook(getNotesNotebook(notebooks, note._id)));
   };
 
   return (

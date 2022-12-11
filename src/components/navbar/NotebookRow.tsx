@@ -17,6 +17,7 @@ import NotebookOptions from './NotebookOptions';
 
 export default function NotebookRow({ notebook }: { notebook: Notebook }) {
   const currentNotebook = useAppSelector((s) => s.data.currentNotebook);
+  const activeNav = useAppSelector((s) => s.ui.activeNav);
   const isEditing = useAppSelector((s) => s.ui.isEditingExistingNotebook);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
@@ -37,7 +38,7 @@ export default function NotebookRow({ notebook }: { notebook: Notebook }) {
   return (
     <div
       className={
-        currentNotebook?._id === notebook._id ? 'nb-row active' : 'nb-row'
+        activeNav === slugify(notebook.name) ? 'nb-row active' : 'nb-row'
       }
       onClick={(e) => handleClick(e)}
     >
