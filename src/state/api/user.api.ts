@@ -55,6 +55,7 @@ export function removeUserAccount() {
     try {
       await axios.delete('/users/delete-account');
       dispatch(resetStore());
+      console.log(getState());
     } catch (error: any) {
       dispatch(setError(error.message));
     }

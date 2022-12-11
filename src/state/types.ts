@@ -9,10 +9,6 @@ export type Note = {
 
 export type CreateNewNotePayload = Pick<Note, 'content'>;
 
-export type FavoriteNote = Note & {
-  notebookName: string;
-};
-
 export type Notebook = {
   name: string;
   _id: string;

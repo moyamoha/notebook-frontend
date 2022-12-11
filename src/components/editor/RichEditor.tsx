@@ -25,7 +25,7 @@ export default function RichEditor() {
         modules={module}
         style={{ height: 'calc(100vh - 82px)', fontSize: '1.2rem' }}
       />
-      <NoteOptions editorValue={editorValue} note={note}></NoteOptions>
+      <NoteOptions editorValue={editorValue}></NoteOptions>
     </div>
   );
 }

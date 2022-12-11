@@ -9,7 +9,7 @@ import { setCurrentNotebook } from '../state/slices/data.slice';
 import { setCurrentNote } from '../state/slices/note.slice';
 import { getNotesNotebook } from '../utils/functions';
 
-export default function Notebook() {
+export default function Favorites() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const favorites = useAppSelector((s) => s.data.favorites);
@@ -18,7 +18,9 @@ export default function Notebook() {
   // const user = useAppSelector((s) => s.user.current);
 
   React.useEffect(() => {
+    // if (currentNote) return;
     if (favorites.length > 0) {
+      console.log('tuli tänne');
       dispatch(setCurrentNote(favorites[0]));
       dispatch(
         setCurrentNotebook(getNotesNotebook(notebooks, favorites[0]._id)),

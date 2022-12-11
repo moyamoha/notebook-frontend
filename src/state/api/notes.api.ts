@@ -14,13 +14,7 @@ import {
   setFavorites,
 } from '../slices/data.slice';
 import { setCurrentNote } from '../slices/note.slice';
-import {
-  AppDispatch,
-  CreateNewNotePayload,
-  FavoriteNote,
-  IStore,
-  Note,
-} from '../types';
+import { AppDispatch, CreateNewNotePayload, IStore, Note } from '../types';
 
 export function deleteNote() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
@@ -48,7 +42,6 @@ export function deleteNote() {
 export function getFavorites() {
   return (dispatch: AppDispatch, getState: () => IStore) => {
     const favsString = localStorage.getItem('favorites');
-    console.log(favsString);
     if (!favsString) {
       console.log('tuli tänne');
       localStorage.setItem('favorites', JSON.stringify([]));
@@ -83,7 +76,7 @@ export function removeFromFavorites(noteId: string) {
     if (!favsString) {
       localStorage.setItem('favorites', JSON.stringify([]));
     } else {
-      const favorites: FavoriteNote[] = JSON.parse(favsString);
+      const favorites: Note[] = JSON.parse(favsString);
       const index = favorites.findIndex((f) => f._id === noteId);
       if (index === -1) return;
       favorites.splice(index, 1);
@@ -117,7 +110,7 @@ export function editExistingNote(newContent: string) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     const notebook = getState().data.currentNotebook;
     const note = getState().note.currentNote;
-    const favorites = getState().data.favorites;
+    const favorites = [...getState().data.favorites];
     try {
       if (!notebook || !note) {
         return;
@@ -129,8 +122,10 @@ export function editExistingNote(newContent: string) {
       const editedNote = response.data;
       dispatch(replaceNote(editedNote));
       if (noteIsFavorite(favorites, editedNote._id)) {
+        console.log('it does not work?');
         const fIndex = favorites.findIndex((f) => f._id === editedNote._id);
         favorites[fIndex] = editedNote;
+        dispatch(setFavorites(favorites));
       }
       dispatch(setCurrentNote(editedNote));
     } catch (error) {}

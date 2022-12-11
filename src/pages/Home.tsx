@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import EditorPlaceholder from '../components/editor/EditorPlaceholder';
 import RichEditor from '../components/editor/RichEditor';
 import Layout from '../components/layout/Layout';
-import useLogoutIfUserNull from '../hooks/useLogoutIfUserNull';
 import { getNotebooks } from '../state/api/notebooks.api';
 import { getFavorites } from '../state/api/notes.api';
 import { useAppDispatch, useAppSelector } from '../state/hooks';

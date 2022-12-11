@@ -5,14 +5,7 @@ export default function AccountSettings() {
   const dispatch = useAppDispatch();
 
   const handleRemoveAccount = () => {
-    const confirm = window.confirm(
-      'Are you sure? This action is too dangerous, you will lose all your data!!!',
-    );
-    if (confirm) {
-      console.log('Should work now ffs');
-      dispatch(removeUserAccount());
-      // dispatch(setShowSettingsModal(false));
-    }
+    dispatch(removeUserAccount());
   };
 
   return (

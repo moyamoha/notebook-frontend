@@ -8,14 +8,10 @@ import HeartIcon from '../common/HeartIcon';
 import Spacer from '../common/Spacer';
 
 type NoteOptionsPropsType = {
-  note: Note;
   editorValue: string;
 };
 
-export default function NoteOptions({
-  note,
-  editorValue,
-}: NoteOptionsPropsType) {
+export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
   const dispatch = useAppDispatch();
   const currentNote = useAppSelector((s) => s.note.currentNote);
 
@@ -41,7 +37,7 @@ export default function NoteOptions({
       <Spacer></Spacer>
       <div className="note-option" onClick={handleSaveNote}>
         <span style={{ fontSize: '0.7rem' }}>
-          {dateToPrettyString(note.updatedAt)}
+          {dateToPrettyString(currentNote ? currentNote.updatedAt : new Date())}
         </span>
         <GrUpdate></GrUpdate>
       </div>

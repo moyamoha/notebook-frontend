@@ -2,7 +2,10 @@ import React from 'react';
 import Layout from '../components/layout/Layout';
 import { navItems, SettingsNavItem } from '../components/settings/nav-items';
 import SettingsHeader from '../components/settings/SettingsHeader';
-import SettingView from '../components/settings/views/Index';
+import About from '../components/settings/views/About';
+import AccountSettings from '../components/settings/views/AccountSettings';
+import DataManagement from '../components/settings/views/DataManagement';
+import Preferences from '../components/settings/views/Preferences';
 
 import '../styles/settings.css';
 
@@ -29,7 +32,22 @@ export default function Settings() {
             ))}
           </section>
           <section className="settings-body">
-            <SettingView viewName={selected.value}></SettingView>
+            {selected.value === 'preferences' ? (
+              <Preferences></Preferences>
+            ) : (
+              <></>
+            )}
+            {selected.value === 'about' ? <About></About> : <></>}
+            {selected.value === 'account' ? (
+              <AccountSettings></AccountSettings>
+            ) : (
+              <></>
+            )}
+            {selected.value === 'data' ? (
+              <DataManagement></DataManagement>
+            ) : (
+              <></>
+            )}
           </section>
         </section>
       </div>

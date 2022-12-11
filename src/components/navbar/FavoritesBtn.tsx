@@ -15,7 +15,6 @@ export default function FavoritesBtn() {
     if (activeNav !== 'favorites') {
       dispatch(setActiveNav('favorites'));
       navigate('/favorites');
-      dispatch(setCurrentNotebook(null));
     }
   };
 

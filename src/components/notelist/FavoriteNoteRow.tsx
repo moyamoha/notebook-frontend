@@ -1,14 +1,14 @@
 import { htmlToText } from 'html-to-text';
-import React from 'react';
-import { BsHeart, BsHeartFill } from 'react-icons/bs';
+import { BsHeartFill } from 'react-icons/bs';
 import { SlNotebook } from 'react-icons/sl';
-import { addToFavorites, removeFromFavorites } from '../../state/api/notes.api';
+import { removeFromFavorites } from '../../state/api/notes.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setCurrentNotebook } from '../../state/slices/data.slice';
 import { setCurrentNote } from '../../state/slices/note.slice';
-import { FavoriteNote, Note } from '../../state/types';
-import '../../styles/note-list.css';
+import { Note } from '../../state/types';
 import { getNotesNotebook, getTwoFirstWords } from '../../utils/functions';
+
+import '../../styles/note-list.css';
 
 type NoteRowPropsType = {
   note: Note;

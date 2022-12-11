@@ -1,4 +1,4 @@
-import { FavoriteNote, Note } from '../../state/types';
+import { Note } from '../../state/types';
 import NotelistPlaceholder from './NotelistPlaceholder';
 import FavoriteNoteRow from './FavoriteNoteRow';
 
