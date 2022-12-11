@@ -6,7 +6,6 @@ import { deleteNotebook } from '../../state/api/notebooks.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setCurrentNotebook } from '../../state/slices/data.slice';
 import {
-  IActiveNav,
   setActiveNav,
   setIsEditingExistingNotebook,
 } from '../../state/slices/ui.slice';
@@ -32,7 +31,7 @@ export default function NotebookRow({ notebook }: { notebook: Notebook }) {
     } else {
       dispatch(setCurrentNotebook(notebook));
     }
-    dispatch(setActiveNav(`${slugify(notebook.name)}` as IActiveNav));
+    dispatch(setActiveNav(`${slugify(notebook.name)}`));
     navigate(`/${slugify(notebook.name)}`);
   };
   return (

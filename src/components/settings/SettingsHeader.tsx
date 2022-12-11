@@ -1,7 +1,6 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import { logout } from '../../state/api/user.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { setShowSettingsModal } from '../../state/slices/ui.slice';
 import Spacer from '../common/Spacer';
 
 export default function SettingsHeader() {
@@ -10,11 +9,6 @@ export default function SettingsHeader() {
 
   const handleLogout = () => {
     dispatch(logout());
-    dispatch(setShowSettingsModal(false));
-  };
-
-  const handleCloseModal = () => {
-    dispatch(setShowSettingsModal(false));
   };
 
   return (
@@ -24,11 +18,6 @@ export default function SettingsHeader() {
         Logout
       </button>
       <Spacer></Spacer>
-      <AiOutlineClose
-        className="modal-close-icon"
-        onClick={handleCloseModal}
-        size={30}
-      ></AiOutlineClose>
     </section>
   );
 }

@@ -1,17 +1,7 @@
-.settings-modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background-color: #333;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  height: 50%;
-  border-radius: 10px;
+.settings-page {
   border: 2px solid orange;
-  color: white;
-  min-width: 40%;
-  width: 60%;
-  overflow-y: scroll;
+  color: black;
+  width: 100%;
 }
 
 .settings-header {
@@ -34,7 +24,6 @@
 .settings-main {
   display: flex;
   margin: 15px;
-  /* gap: 40px; */
   font-size: 0.9rem;
 }
 
@@ -61,12 +50,8 @@
 }
 
 .settings-nav-item.selected {
-  background-color: white;
+  background-color: #bbb;
   color: black;
-}
-
-.modal-close-icon {
-  cursor: pointer;
 }
 
 .settings-body {
@@ -85,7 +70,7 @@
 }
 
 .settings-link {
-  color: #f0a110;
+  color: #c7870e;
   text-decoration: none;
   transition: color 0.3s ease-in;
 }

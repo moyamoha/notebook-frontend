@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Notebook from './pages/Notebook';
 import Favorites from './pages/Favorites';
-import SettingsModal from './components/settings/SettingsModal';
+import Settings from './pages/Settings';
 
 import './App.css';
 import React from 'react';
@@ -25,7 +25,6 @@ function App() {
 
   return (
     <div className="App">
-      <SettingsModal></SettingsModal>
       <Routes>
         <Route
           path="/"
@@ -41,7 +40,11 @@ function App() {
         ></Route>
         <Route
           path="/favorites"
-          element={user ? <Favorites></Favorites> : <Signup></Signup>}
+          element={user ? <Favorites></Favorites> : <Login></Login>}
+        ></Route>
+        <Route
+          path="/settings"
+          element={user ? <Settings></Settings> : <Login></Login>}
         ></Route>
         <Route
           path="/:nb_name"

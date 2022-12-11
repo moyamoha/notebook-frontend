@@ -10,7 +10,7 @@ import {
   setLoginButtonLoading,
   setSignupBtnLoading,
 } from '../slices/ui.slice';
-import { resetData, setNotebooks } from '../slices/data.slice';
+import { resetData } from '../slices/data.slice';
 import { setCurrentNote } from '../slices/note.slice';
 
 export function login(
@@ -50,18 +50,10 @@ export function signup(user: NewUser, navigate: NavigateFunction) {
   };
 }
 
-export function deleteUserAccount() {
+export function removeUserAccount() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     try {
-      console.log('Why?');
-      const user = getState().user.current;
-      if (!user) {
-        // SHOW PROPER ERROR MESSAGE
-        return;
-      }
       await axios.delete('/users/delete-account');
-      console.log('Why2?');
-      window.localStorage.clear();
       dispatch(resetStore());
     } catch (error: any) {
       dispatch(setError(error.message));
@@ -70,7 +62,6 @@ export function deleteUserAccount() {
 }
 
 export function logout() {
-  console.log('logout function');
   return (dispatch: AppDispatch, getState: () => IStore) => {
     window.localStorage.removeItem('accessToken');
     dispatch(resetStore());

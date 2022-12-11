@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../../state/hooks';
-import { deleteUserAccount } from '../../../state/api/user.api';
+import { removeUserAccount } from '../../../state/api/user.api';
 
 export default function AccountSettings() {
   const dispatch = useAppDispatch();
@@ -10,7 +10,7 @@ export default function AccountSettings() {
     );
     if (confirm) {
       console.log('Should work now ffs');
-      dispatch(deleteUserAccount());
+      dispatch(removeUserAccount());
       // dispatch(setShowSettingsModal(false));
     }
   };

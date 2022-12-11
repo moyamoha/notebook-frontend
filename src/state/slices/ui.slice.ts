@@ -1,34 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export type IActiveNav =
-  | ''
-  | 'new_note'
-  | 'scratch_pad'
-  | 'favorites'
-  | 'all_notes';
-
 type InitialStateT = {
   error: string;
-  activeNav: IActiveNav;
+  activeNav: string;
   isCreatingNew: boolean;
   expandNotebooks: boolean;
   loginButtonLoading: boolean;
   signupBtnLoading: boolean;
   isEditingExistingNotebook: boolean;
   isEditingNote: boolean;
-  showSettingsModal: boolean;
 };
 
 const initialState: InitialStateT = {
   error: '',
-  activeNav: 'scratch_pad',
+  activeNav: '',
   isCreatingNew: false, // refers to if it is creating new notebook
   isEditingExistingNotebook: false,
   expandNotebooks: true,
   loginButtonLoading: false,
   signupBtnLoading: false,
   isEditingNote: false,
-  showSettingsModal: false,
 };
 
 const uiSlice = createSlice({
@@ -38,7 +29,7 @@ const uiSlice = createSlice({
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
-    setActiveNav: (state, action: PayloadAction<IActiveNav>) => {
+    setActiveNav: (state, action: PayloadAction<string>) => {
       state.activeNav = action.payload;
     },
     setIsCreatingNew: (state, action: PayloadAction<boolean>) => {
@@ -59,9 +50,6 @@ const uiSlice = createSlice({
     setIsEditingNote: (state, action: PayloadAction<boolean>) => {
       state.isEditingNote = action.payload;
     },
-    setShowSettingsModal: (state, action: PayloadAction<boolean>) => {
-      state.showSettingsModal = action.payload;
-    },
     resetUi: () => initialState,
   },
 });
@@ -74,7 +62,6 @@ export const {
   setLoginButtonLoading,
   setSignupBtnLoading,
   setIsEditingExistingNotebook,
-  setShowSettingsModal,
   resetUi,
 } = uiSlice.actions;
 export default uiSlice.reducer;
