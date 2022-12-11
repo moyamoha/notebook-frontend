@@ -1,4 +1,4 @@
-import { Note, Notebook } from '../state/types';
+import { IUser, Note, Notebook } from '../state/types';
 
 export const slugify = (text: string): string => {
   return text
@@ -43,4 +43,8 @@ export const noteIsFavorite = (favorites: Note[], noteId: string) => {
 
 export const getNoteIndex = (notebook: Notebook, noteId: string): number => {
   return notebook.notes.findIndex((n) => n._id === noteId);
+};
+
+export const getUsrFullName = (user: IUser): string => {
+  return `${user.firstname} ${user.lastname}`;
 };

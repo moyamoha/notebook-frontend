@@ -15,6 +15,9 @@
 .settings-btn {
   color: whitesmoke;
   background-color: #ffb120;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .settings-btn:hover {

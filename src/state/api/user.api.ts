@@ -12,6 +12,7 @@ import {
 } from '../slices/ui.slice';
 import { resetData } from '../slices/data.slice';
 import { setCurrentNote } from '../slices/note.slice';
+import { getUsrFullName } from '../../utils/functions';
 
 export function login(
   credintials: { password: string; email: string },
@@ -76,5 +77,34 @@ export function resetStore() {
     dispatch(resetUi());
     dispatch(setCurrentNote(null));
     dispatch(resetData());
+  };
+}
+
+export function downloadUserData() {
+  return async (dispatch: AppDispatch, getState: () => IStore) => {
+    const user = getState().user.current;
+    if (!user) return;
+    try {
+      const response = await axios.get('/users/download-data', {
+        responseType: 'blob',
+      });
+      const blob = new Blob([response.data]);
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      const fileName = getUsrFullName(user) + '_data.json';
+      link.href = url;
+      link.setAttribute('download', fileName);
+      link.textContent = fileName;
+      link.target = '_blank';
+      link.addEventListener('click', (e) => {
+        setTimeout(() => {
+          link.remove();
+        }, 2000);
+      });
+      const placeToPutLink = document.getElementById(
+        'data-management',
+      ) as HTMLElement;
+      placeToPutLink.appendChild(link);
+    } catch (e) {}
   };
 }
