@@ -24,6 +24,7 @@ export function getNotebooks(navigate: NavigateFunction) {
           dispatch(setCurrentNote(notebooks[0].notes[0]));
         }
         navigate(`/${slugify(notebooks[0].name)}`);
+        dispatch(setActiveNav(`${slugify(notebooks[0].name)}`));
       }
       dispatch(setNotebooks(notebooks));
     } catch (error: any) {

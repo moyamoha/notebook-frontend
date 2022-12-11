@@ -21,6 +21,7 @@ export default function NoteRow({ note }: NoteRowPropsType) {
     dispatch(setCurrentNote(note));
   };
 
+  console.log(getTwoFirstWords(htmlToText(note.content)));
   return (
     <div
       className={

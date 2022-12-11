@@ -16,7 +16,6 @@ function App() {
   const goto = useNavigate();
 
   React.useEffect(() => {
-    console.log('useEffect in app component');
     if (!user) {
       localStorage.removeItem('accessToken');
       goto('/login');

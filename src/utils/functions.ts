@@ -8,7 +8,9 @@ export const slugify = (text: string): string => {
 };
 
 export const getTwoFirstWords = (text: string): string => {
-  return text.split(' ').slice(0, 2).join(' ').toLocaleLowerCase();
+  const firstRow = text.split('\n')[0];
+  const splited = firstRow.split(' ').map((w) => w.replaceAll('\n', ''));
+  return splited.slice(0, 2).join(' ').toLocaleLowerCase();
 };
 
 export const getNotesNotebook = (

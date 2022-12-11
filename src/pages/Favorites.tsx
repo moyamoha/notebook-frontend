@@ -15,10 +15,8 @@ export default function Favorites() {
   const favorites = useAppSelector((s) => s.data.favorites);
   const notebooks = useAppSelector((s) => s.data.notebooks);
   const currentNote = useAppSelector((s) => s.note.currentNote);
-  // const user = useAppSelector((s) => s.user.current);
 
   React.useEffect(() => {
-    // if (currentNote) return;
     if (favorites.length > 0) {
       console.log('tuli tänne');
       dispatch(setCurrentNote(favorites[0]));

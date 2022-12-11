@@ -50,12 +50,13 @@ export function signup(user: NewUser, navigate: NavigateFunction) {
   };
 }
 
-export function removeUserAccount() {
+export function removeUserAccount(navigate: NavigateFunction) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     try {
       await axios.delete('/users/delete-account');
       dispatch(resetStore());
-      console.log(getState());
+      localStorage.clear();
+      navigate('/login');
     } catch (error: any) {
       dispatch(setError(error.message));
     }
@@ -63,7 +64,7 @@ export function removeUserAccount() {
 }
 
 export function logout() {
-  return (dispatch: AppDispatch, getState: () => IStore) => {
+  return async (dispatch: AppDispatch, getState: () => IStore) => {
     window.localStorage.removeItem('accessToken');
     dispatch(resetStore());
   };
