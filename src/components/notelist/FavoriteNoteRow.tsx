@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setCurrentNote } from '../../state/slices/note.slice';
 import { FavoriteNote, Note } from '../../state/types';
 import '../../styles/note-list.css';
-import { getNotesNotebookName, getTwoFirstWords } from '../../utils/functions';
+import { getNotesNotebook, getTwoFirstWords } from '../../utils/functions';
 
 type NoteRowPropsType = {
   note: Note;
@@ -51,7 +51,7 @@ export default function FavoriteNoteRow({ note }: NoteRowPropsType) {
           }}
         >
           <SlNotebook size={15}></SlNotebook>
-          <span>{getNotesNotebookName(notebooks, note._id)}</span>
+          <span>{getNotesNotebook(notebooks, note._id)?.name}</span>
         </div>
       </div>
 

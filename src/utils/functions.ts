@@ -11,16 +11,16 @@ export const getTwoFirstWords = (text: string): string => {
   return text.split(' ').slice(0, 2).join(' ').toLocaleLowerCase();
 };
 
-export const getNotesNotebookName = (
+export const getNotesNotebook = (
   notebooks: Notebook[],
   noteId: string,
-): string => {
-  let res = '';
+): Notebook | null => {
+  let res = null;
   for (let i = 0; i < notebooks.length; i++) {
     const nb = notebooks[i];
     for (let j = 0; j < nb.notes.length; j++) {
       if (nb.notes[j]._id === noteId) {
-        res = nb.name;
+        res = nb;
         break;
       }
     }

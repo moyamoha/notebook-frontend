@@ -2,8 +2,7 @@ import axios from 'axios';
 import { htmlToText } from 'html-to-text';
 import { NavigateFunction } from 'react-router';
 import {
-  getNotesNotebookName,
-  getTwoFirstWords,
+  getNotesNotebook,
   noteIsFavorite,
   slugify,
 } from '../../utils/functions';
@@ -62,15 +61,15 @@ export function getFavorites() {
 export function addToFavorites(note: Note) {
   return (dispatch: AppDispatch, getState: () => IStore) => {
     const favsString = localStorage.getItem('favorites');
-    const notesNotebookName = getNotesNotebookName(
+    const notesNotebookName = getNotesNotebook(
       getState().data.notebooks,
       note._id,
-    );
+    )?.name;
     if (!favsString) {
       localStorage.setItem('favorites', JSON.stringify([note]));
     } else {
-      const favorites: FavoriteNote[] = JSON.parse(favsString);
-      favorites.push({ ...note, notebookName: notesNotebookName });
+      const favorites: Note[] = JSON.parse(favsString);
+      favorites.push(note);
       localStorage.setItem('favorites', JSON.stringify(favorites));
       dispatch(setFavorites(favorites));
     }
