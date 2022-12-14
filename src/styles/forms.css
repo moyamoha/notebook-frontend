@@ -85,3 +85,40 @@
   align-items: center;
   gap: 10px;
 }
+
+.switch-toggle--off,
+.switch-toggle--on {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+  padding: 3px;
+  height: 30px;
+  width: 60px;
+}
+
+.switch-toggle--off {
+  background-color: #ccc;
+}
+.switch-toggle--on {
+  background-color: rgb(10, 167, 10);
+}
+
+.toggle-circle--on,
+.toggle-circle--off {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.5s ease-in;
+}
+
+/* .toggle-circle--off {
+  left: 0;
+}
+
+.toggle-circle--on {
+  right: 0;
+} */

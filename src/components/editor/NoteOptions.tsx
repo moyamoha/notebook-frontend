@@ -32,6 +32,7 @@ export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
   };
 
   const handleCopyNote = () => {
+    if (showCopied) return;
     window.navigator.clipboard.writeText(editorValue);
     setShowCopied(true);
     setTimeout(() => {

@@ -90,3 +90,12 @@
   text-decoration: underline;
   color: #dbad07;
 }
+
+.preference-row {
+  display: flex;
+  width: 40%;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}

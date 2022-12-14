@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import dataReducer from './slices/data.slice';
 import noteReducer from './slices/note.slice';
+import preferencesReducer from './slices/preferences.slice';
 import uiReducer from './slices/ui.slice';
 import userReducer from './slices/user.slice';
 
@@ -17,6 +18,7 @@ const reducer = combineReducers({
   note: noteReducer,
   ui: uiReducer,
   user: userReducer,
+  preferences: preferencesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

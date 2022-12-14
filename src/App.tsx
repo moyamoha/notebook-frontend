@@ -1,15 +1,16 @@
-import React from 'react';
-import Login from './pages/Login';
+import React, { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router';
 
 import { useAppSelector } from './state/hooks';
 import Home from './pages/Home';
+import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Notebook from './pages/Notebook';
 import Favorites from './pages/Favorites';
-import Settings from './pages/Settings';
 
 import './App.css';
+
+const Settings = lazy(() => import('./pages/Settings'));
 
 function App() {
   const user = useAppSelector((s) => s.user.current);
@@ -43,7 +44,15 @@ function App() {
         ></Route>
         <Route
           path="/settings"
-          element={user ? <Settings></Settings> : <Login></Login>}
+          element={
+            user ? (
+              <Suspense fallback={'loading...'}>
+                <Settings></Settings>
+              </Suspense>
+            ) : (
+              <Login></Login>
+            )
+          }
         ></Route>
         <Route
           path="/:nb_name"
