@@ -1,5 +1,3 @@
-import React from 'react';
-
 type EmailInputPropType = {
   value: string;
   setState: (key: string, v: string) => void;

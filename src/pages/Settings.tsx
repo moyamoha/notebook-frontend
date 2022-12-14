@@ -1,6 +1,7 @@
 import React from 'react';
-import Layout from '../components/layout/Layout';
+
 import { navItems, SettingsNavItem } from '../components/settings/nav-items';
+import Layout from '../components/layout/Layout';
 import SettingsHeader from '../components/settings/SettingsHeader';
 import About from '../components/settings/views/About';
 import AccountSettings from '../components/settings/views/AccountSettings';

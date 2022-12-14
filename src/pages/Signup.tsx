@@ -1,16 +1,17 @@
 import { FormEvent, useState } from 'react';
-import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router';
-import EmailInput from '../components/forms/EmailInput';
-import { login, signup } from '../state/api/user.api';
+import { Link } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from '../state/hooks';
-import '../styles/login-signup-page.css';
-import '../styles/forms.css';
+import { setError } from '../state/slices/ui.slice';
+import { signup } from '../state/api/user.api';
+import EmailInput from '../components/forms/EmailInput';
 import TextInput from '../components/forms/TextInput';
 import PasswordInput from '../components/forms/PasswordInput';
-import { Link, NavLink } from 'react-router-dom';
-import { setError } from '../state/slices/ui.slice';
 import ErrorAlert from '../components/forms/ErrorAlert';
+
+import '../styles/forms.css';
+import '../styles/login-signup-page.css';
 
 export default function Signup() {
   const dispatch = useAppDispatch();

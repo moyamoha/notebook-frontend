@@ -1,5 +1,5 @@
-import React from 'react';
 import { MdDownload } from 'react-icons/md';
+
 import { downloadUserData } from '../../../state/api/user.api';
 import { useAppDispatch } from '../../../state/hooks';
 

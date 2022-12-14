@@ -1,10 +1,9 @@
-import React from 'react';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { setCurrentNotebook } from '../../state/slices/data.slice';
-import { setActiveNav } from '../../state/slices/ui.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AiOutlineHeart } from 'react-icons/ai';
+
 import { IStore } from '../../state/types';
+import { setActiveNav } from '../../state/slices/ui.slice';
 
 export default function FavoritesBtn() {
   const activeNav = useSelector((s: IStore) => s.ui.activeNav);

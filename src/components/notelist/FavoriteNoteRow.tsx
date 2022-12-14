@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setCurrentNotebook } from '../../state/slices/data.slice';
 import { setCurrentNote } from '../../state/slices/note.slice';
 import { Note } from '../../state/types';
-import { getNotesNotebook, getTwoFirstWords } from '../../utils/functions';
+import { getNotesNotebook, getNFirstWords } from '../../utils/functions';
 
 import '../../styles/note-list.css';
 
@@ -43,7 +43,7 @@ export default function FavoriteNoteRow({ note }: NoteRowPropsType) {
           flexDirection: 'column',
         }}
       >
-        <span>{getTwoFirstWords(htmlToText(note.content))}</span>
+        <span>{getNFirstWords(htmlToText(note.content), 6)}</span>
         <div
           style={{
             display: 'flex',

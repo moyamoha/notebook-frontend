@@ -1,13 +1,14 @@
 import React from 'react';
+
 import { useNavigate } from 'react-router';
-import EditorPlaceholder from '../components/editor/EditorPlaceholder';
-import RichEditor from '../components/editor/RichEditor';
-import Layout from '../components/layout/Layout';
-import FavoritesList from '../components/notelist/FavoritesList';
+import { getNotesNotebook } from '../utils/functions';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { setCurrentNotebook } from '../state/slices/data.slice';
 import { setCurrentNote } from '../state/slices/note.slice';
-import { getNotesNotebook } from '../utils/functions';
+import Layout from '../components/layout/Layout';
+import RichEditor from '../components/editor/RichEditor';
+import FavoritesList from '../components/notelist/FavoritesList';
+import EditorPlaceholder from '../components/editor/EditorPlaceholder';
 
 export default function Favorites() {
   const dispatch = useAppDispatch();

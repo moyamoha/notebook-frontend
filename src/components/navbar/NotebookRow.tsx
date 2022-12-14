@@ -1,26 +1,26 @@
 import React from 'react';
-import { BsPen, BsTrash } from 'react-icons/bs';
-import { SlNotebook, SlOptions } from 'react-icons/sl';
+import { SlNotebook } from 'react-icons/sl';
+
+import { Notebook } from '../../state/types';
+import { slugify } from '../../utils/functions';
 import { NavigateFunction, useNavigate } from 'react-router';
-import { deleteNotebook } from '../../state/api/notebooks.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setCurrentNotebook } from '../../state/slices/data.slice';
 import {
   setActiveNav,
   setIsEditingExistingNotebook,
 } from '../../state/slices/ui.slice';
-import { Notebook } from '../../state/types';
-import { slugify } from '../../utils/functions';
 import Spacer from '../common/Spacer';
 import NotebookField from './NotebookField';
 import NotebookOptions from './NotebookOptions';
 
 export default function NotebookRow({ notebook }: { notebook: Notebook }) {
+  const dispatch = useAppDispatch();
+  const navigate: NavigateFunction = useNavigate();
+
   const currentNotebook = useAppSelector((s) => s.data.currentNotebook);
   const activeNav = useAppSelector((s) => s.ui.activeNav);
   const isEditing = useAppSelector((s) => s.ui.isEditingExistingNotebook);
-  const dispatch = useAppDispatch();
-  const navigate: NavigateFunction = useNavigate();
 
   const handleClick = (e: React.MouseEvent) => {
     // e.stopPropagation();

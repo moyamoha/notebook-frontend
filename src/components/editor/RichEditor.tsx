@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { formats, module } from './editor-config';
 
-import '../../styles/editor.css';
-import NoteOptions from './NoteOptions';
 import { Note } from '../../state/types';
 import { useAppSelector } from '../../state/hooks';
-import React from 'react';
+import { formats, module } from './editor-config';
+import NoteOptions from './NoteOptions';
+
+import '../../styles/editor.css';
 
 export default function RichEditor() {
   const note = useAppSelector((s) => s.note.currentNote) as Note;

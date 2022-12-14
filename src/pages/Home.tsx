@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import EditorPlaceholder from '../components/editor/EditorPlaceholder';
-import RichEditor from '../components/editor/RichEditor';
-import Layout from '../components/layout/Layout';
+
 import { getNotebooks } from '../state/api/notebooks.api';
 import { getFavorites } from '../state/api/notes.api';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
+import EditorPlaceholder from '../components/editor/EditorPlaceholder';
+import RichEditor from '../components/editor/RichEditor';
+import Layout from '../components/layout/Layout';
 
 export default function Home() {
   const dispatch = useAppDispatch();

@@ -1,39 +1,33 @@
 import axios from 'axios';
-import { htmlToText } from 'html-to-text';
 import { NavigateFunction } from 'react-router';
-import {
-  getNoteIndex,
-  getNotesNotebook,
-  noteIsFavorite,
-  slugify,
-} from '../../utils/functions';
+
+import { AppDispatch, CreateNewNotePayload, IStore, Note } from '../types';
+import { noteIsFavorite, slugify } from '../../utils/functions';
+import { setCurrentNote } from '../slices/note.slice';
 import {
   addNoteToNotebook,
   removeNoteFromNotebook,
   replaceNote,
   setFavorites,
 } from '../slices/data.slice';
-import { setCurrentNote } from '../slices/note.slice';
-import { AppDispatch, CreateNewNotePayload, IStore, Note } from '../types';
 
 export function deleteNote() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     const notebook = getState().data.currentNotebook;
-    const notebooks = getState().data.notebooks;
-    const note = getState().note.currentNote as Note;
+    const note = getState().note.currentNote;
     try {
-      if (!notebook || !note) {
-        // SHOW PROPER ERROR MESSAGE
-        return;
-      }
+      if (!notebook || !note) return;
       await axios.delete(`/notes/${notebook._id}/${note._id}`);
-      console.log('tänne');
       if (noteIsFavorite(getState().data.favorites, note._id)) {
         dispatch(removeFromFavorites(note._id));
       }
       dispatch(removeNoteFromNotebook(note._id));
       if (getState().data.currentNotebook?.notes.length === 0) {
         dispatch(setCurrentNote(null));
+      } else {
+        dispatch(
+          setCurrentNote(getState().data.currentNotebook?.notes[0] as Note),
+        );
       }
     } catch (error) {}
   };
@@ -55,10 +49,6 @@ export function getFavorites() {
 export function addToFavorites(note: Note) {
   return (dispatch: AppDispatch, getState: () => IStore) => {
     const favsString = localStorage.getItem('favorites');
-    const notesNotebookName = getNotesNotebook(
-      getState().data.notebooks,
-      note._id,
-    )?.name;
     if (!favsString) {
       localStorage.setItem('favorites', JSON.stringify([note]));
     } else {
@@ -93,9 +83,7 @@ export function createNewNote(
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     const notebook = getState().data.currentNotebook;
     try {
-      if (!notebook) {
-        return;
-      }
+      if (!notebook) return;
       const response = await axios.post(`/notes/${notebook._id}`, note);
       dispatch(
         addNoteToNotebook({ notebookId: notebook._id, note: response.data }),

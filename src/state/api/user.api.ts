@@ -3,16 +3,16 @@ import jwtDecode from 'jwt-decode';
 import { NavigateFunction } from 'react-router';
 
 import { AppDispatch, IStore, IUser, NewUser } from '../types';
+import { getUsrFullName } from '../../utils/functions';
 import { setUser } from '../slices/user.slice';
+import { resetData } from '../slices/data.slice';
+import { setCurrentNote } from '../slices/note.slice';
 import {
   resetUi,
   setError,
   setLoginButtonLoading,
   setSignupBtnLoading,
 } from '../slices/ui.slice';
-import { resetData } from '../slices/data.slice';
-import { setCurrentNote } from '../slices/note.slice';
-import { getUsrFullName } from '../../utils/functions';
 
 export function login(
   credintials: { password: string; email: string },

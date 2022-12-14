@@ -1,9 +1,13 @@
+import { useState } from 'react';
+import { AiOutlineCheck } from 'react-icons/ai';
+import { BiCopy } from 'react-icons/bi';
 import { BsTrash } from 'react-icons/bs';
 import { GrUpdate } from 'react-icons/gr';
-import { deleteNote, editExistingNote } from '../../state/api/notes.api';
-import { useAppDispatch, useAppSelector } from '../../state/hooks';
+
 import { Note } from '../../state/types';
 import { dateToPrettyString } from '../../utils/functions';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { deleteNote, editExistingNote } from '../../state/api/notes.api';
 import HeartIcon from '../common/HeartIcon';
 import Spacer from '../common/Spacer';
 
@@ -14,6 +18,7 @@ type NoteOptionsPropsType = {
 export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
   const dispatch = useAppDispatch();
   const currentNote = useAppSelector((s) => s.note.currentNote);
+  const [showCopied, setShowCopied] = useState(false);
 
   const handleRemoveNote = () => {
     const confirm = window.confirm(`You really want to delete the note?`);
@@ -26,6 +31,14 @@ export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
     dispatch(editExistingNote(editorValue));
   };
 
+  const handleCopyNote = () => {
+    window.navigator.clipboard.writeText(editorValue);
+    setShowCopied(true);
+    setTimeout(() => {
+      setShowCopied(false);
+    }, 2000);
+  };
+
   return (
     <div className="note-options">
       <div className="note-option" onClick={handleRemoveNote}>
@@ -33,6 +46,17 @@ export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
       </div>
       <div className="note-option">
         <HeartIcon note={currentNote as Note}></HeartIcon>
+      </div>
+      <div className="note-option">
+        {/* <BiCopy onClick={handleCopyNote}></BiCopy> */}
+        {showCopied ? (
+          <>
+            <AiOutlineCheck></AiOutlineCheck>
+            <span style={{ fontSize: '0.7rem' }}>Copied</span>
+          </>
+        ) : (
+          <BiCopy onClick={handleCopyNote}></BiCopy>
+        )}
       </div>
       <Spacer></Spacer>
       <div className="note-option" onClick={handleSaveNote}>

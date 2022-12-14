@@ -1,5 +1,5 @@
-import React from 'react';
 import { BiPlus } from 'react-icons/bi';
+
 import { useAppDispatch } from '../../state/hooks';
 import { setCurrentNotebook } from '../../state/slices/data.slice';
 import { setIsCreatingNew } from '../../state/slices/ui.slice';

@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { NavigateFunction } from 'react-router';
+
+import { AppDispatch, IStore, Notebook } from '../types';
 import { slugify } from '../../utils/functions';
+import { setActiveNav, setError } from '../slices/ui.slice';
+import { setCurrentNote } from '../slices/note.slice';
 import {
   addNotebook,
   removeNotebook,
@@ -9,9 +13,6 @@ import {
   setFavorites,
   setNotebooks,
 } from '../slices/data.slice';
-import { setCurrentNote } from '../slices/note.slice';
-import { setActiveNav, setError } from '../slices/ui.slice';
-import { AppDispatch, IStore, Notebook } from '../types';
 
 export function getNotebooks(navigate: NavigateFunction) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {

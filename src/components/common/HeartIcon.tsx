@@ -1,11 +1,12 @@
 import React from 'react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
+
 import { addToFavorites, removeFromFavorites } from '../../state/api/notes.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { noteIsFavorite } from '../../utils/functions';
 import { Note } from '../../state/types';
 
 import '../../styles/note-list.css';
-import { noteIsFavorite } from '../../utils/functions';
 
 export default function HeartIcon({ note }: { note: Note }) {
   const dispatch = useAppDispatch();

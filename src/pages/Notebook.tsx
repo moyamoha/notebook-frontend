@@ -1,11 +1,11 @@
 import React from 'react';
+
+import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { setCurrentNote } from '../state/slices/note.slice';
 import EditorPlaceholder from '../components/editor/EditorPlaceholder';
 import RichEditor from '../components/editor/RichEditor';
 import Layout from '../components/layout/Layout';
 import NoteList from '../components/notelist/NoteList';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
-import { setCurrentNote } from '../state/slices/note.slice';
-import { slugify } from '../utils/functions';
 
 export default function Notebook() {
   const current = useAppSelector((s) => s.data.currentNotebook);

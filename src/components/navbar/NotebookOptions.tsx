@@ -1,7 +1,10 @@
 import React from 'react';
-import { BsOption, BsPen, BsTrash } from 'react-icons/bs';
-import { SlOptions } from 'react-icons/sl';
 import { useNavigate } from 'react-router';
+import { BsPen, BsTrash } from 'react-icons/bs';
+import { SlOptions } from 'react-icons/sl';
+
+import { Notebook } from '../../state/types';
+import { slugify } from '../../utils/functions';
 import { deleteNotebook } from '../../state/api/notebooks.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setCurrentNotebook } from '../../state/slices/data.slice';
@@ -9,8 +12,6 @@ import {
   setActiveNav,
   setIsEditingExistingNotebook,
 } from '../../state/slices/ui.slice';
-import { Notebook } from '../../state/types';
-import { slugify } from '../../utils/functions';
 
 export default function NotebookOptions({ notebook }: { notebook: Notebook }) {
   const dispatch = useAppDispatch();

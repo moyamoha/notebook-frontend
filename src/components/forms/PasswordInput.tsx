@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 
 type PasswordInputPropType = {

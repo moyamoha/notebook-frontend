@@ -1,12 +1,14 @@
-import axios from 'axios';
 import React from 'react';
+import axios from 'axios';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import store, { persistor } from './state/store';
-import App from './App';
-import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
+
+import store, { persistor } from './state/store';
+import App from './App';
+
+import './index.css';
 
 axios.defaults.baseURL = 'https://notebookapp.onrender.com';
 

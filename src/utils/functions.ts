@@ -7,10 +7,12 @@ export const slugify = (text: string): string => {
     .join('-');
 };
 
-export const getTwoFirstWords = (text: string): string => {
+export const getNFirstWords = (text: string, n: number): string => {
+  let words = n;
   const firstRow = text.split('\n')[0];
   const splited = firstRow.split(' ').map((w) => w.replaceAll('\n', ''));
-  return splited.slice(0, 2).join(' ').toLocaleLowerCase();
+  if (n > splited.length) words = splited.length;
+  return splited.slice(0, words).join(' ').toLocaleLowerCase();
 };
 
 export const getNotesNotebook = (

@@ -1,13 +1,12 @@
 import { htmlToText } from 'html-to-text';
-import React from 'react';
-import { BsHeart, BsHeartFill } from 'react-icons/bs';
-import { addToFavorites, removeFromFavorites } from '../../state/api/notes.api';
-import { useAppDispatch, useAppSelector } from '../../state/hooks';
+
 import { Note } from '../../state/types';
-import { getTwoFirstWords } from '../../utils/functions';
-import '../../styles/note-list.css';
-import HeartIcon from '../common/HeartIcon';
+import { getNFirstWords } from '../../utils/functions';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setCurrentNote } from '../../state/slices/note.slice';
+import HeartIcon from '../common/HeartIcon';
+
+import '../../styles/note-list.css';
 
 type NoteRowPropsType = {
   note: Note;
@@ -21,7 +20,7 @@ export default function NoteRow({ note }: NoteRowPropsType) {
     dispatch(setCurrentNote(note));
   };
 
-  console.log(getTwoFirstWords(htmlToText(note.content)));
+  console.log(getNFirstWords(htmlToText(note.content), 6));
   return (
     <div
       className={
@@ -32,7 +31,9 @@ export default function NoteRow({ note }: NoteRowPropsType) {
       onClick={handleNoteClick}
     >
       <span>
-        {note.content ? getTwoFirstWords(htmlToText(note.content)) : 'new note'}
+        {note.content
+          ? getNFirstWords(htmlToText(note.content), 6)
+          : 'new note'}
       </span>
       <HeartIcon note={note}></HeartIcon>
     </div>

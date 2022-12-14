@@ -1,12 +1,14 @@
+import { useSelector } from 'react-redux';
+
+import { IStore } from '../../state/types';
+import { useAppSelector } from '../../state/hooks';
+import NotebookSectionHeader from './NotebookSectionHeader';
+import NotebookRow from './NotebookRow';
+import NewNotebookField from './NewNotebookField';
 import FavoritesBtn from './FavoritesBtn';
 import SettingsBtn from './SettingsBtn';
-import NotebookSectionHeader from './NotebookSectionHeader';
-import { useSelector } from 'react-redux';
-import { IStore } from '../../state/types';
-import NotebookRow from './NotebookRow';
+
 import '../../styles/navbar.css';
-import { useAppSelector } from '../../state/hooks';
-import NewNotebookField from './NewNotebookField';
 
 export default function Navbar() {
   const notebooks = useSelector((s: IStore) => s.data.notebooks);

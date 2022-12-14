@@ -1,6 +1,6 @@
-import { AiOutlineSetting } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { AiOutlineSetting } from 'react-icons/ai';
 import { useAppSelector } from '../../state/hooks';
 import { setCurrentNotebook } from '../../state/slices/data.slice';
 import { setActiveNav } from '../../state/slices/ui.slice';
@@ -16,6 +16,7 @@ export default function SettingsBtn() {
     dispatch(setCurrentNotebook(null));
     navigate('/settings');
   };
+
   return (
     <div
       className={activeNav === 'settings' ? 'active nav-line' : 'nav-line'}

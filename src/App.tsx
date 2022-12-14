@@ -1,3 +1,4 @@
+import React from 'react';
 import Login from './pages/Login';
 import { Navigate, Route, Routes, useNavigate } from 'react-router';
 
@@ -9,7 +10,6 @@ import Favorites from './pages/Favorites';
 import Settings from './pages/Settings';
 
 import './App.css';
-import React from 'react';
 
 function App() {
   const user = useAppSelector((s) => s.user.current);

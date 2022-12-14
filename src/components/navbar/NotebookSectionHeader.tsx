@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { IStore } from '../../state/types';
-
 import { MdOutlineExpandMore } from 'react-icons/md';
 import { BiLayer, BiChevronRight } from 'react-icons/bi';
-import NewNotebookIcon from './NewNotebookIcon';
+
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setExpandNotebooks } from '../../state/slices/ui.slice';
+import NewNotebookIcon from './NewNotebookIcon';
 
 export default function NotebookSectionHeader() {
   const notebooks = useAppSelector((s) => s.data.notebooks);

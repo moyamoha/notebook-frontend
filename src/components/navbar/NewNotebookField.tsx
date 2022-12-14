@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { createNotebook } from '../../state/api/notebooks.api';
+
 import { useAppDispatch } from '../../state/hooks';
-import {
-  setIsCreatingNew,
-  setIsEditingExistingNotebook,
-} from '../../state/slices/ui.slice';
+import { createNotebook } from '../../state/api/notebooks.api';
+import { setIsCreatingNew } from '../../state/slices/ui.slice';
+
 import '../../styles/forms.css';
 
 export default function NewNotebookField() {

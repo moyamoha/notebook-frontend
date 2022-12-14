@@ -1,4 +1,3 @@
-import { AiOutlineClose } from 'react-icons/ai';
 import { logout } from '../../state/api/user.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import Spacer from '../common/Spacer';

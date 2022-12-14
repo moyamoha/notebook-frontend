@@ -1,10 +1,9 @@
-import { useAppSelector } from '../../state/hooks';
 import { Note } from '../../state/types';
 import CreateNote from './CreateNote';
 import NoteRow from './NoteRow';
+import NotelistPlaceholder from './NotelistPlaceholder';
 
 import '../../styles/note-list.css';
-import NotelistPlaceholder from './NotelistPlaceholder';
 
 type NoteListPropsType = {
   notes: Note[];

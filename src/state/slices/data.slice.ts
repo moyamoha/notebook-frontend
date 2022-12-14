@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getNoteIndex } from '../../utils/functions';
+
 import { Note, Notebook } from '../types';
+import { getNoteIndex } from '../../utils/functions';
 
 export type InitialStateT = {
   notebooks: Notebook[];
