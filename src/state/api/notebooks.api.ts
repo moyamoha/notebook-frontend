@@ -79,6 +79,7 @@ export function editNotebookName(name: string, navigate: NavigateFunction) {
       await axios.patch(`/notebooks/rename/${notebookId}`, { name });
       dispatch(renameNotebook({ id: notebookId, name: name }));
       navigate(`/${slugify(name)}`);
+      dispatch(setActiveNav(slugify(name)));
     } catch (error: any) {
       dispatch(setError(error.message));
     }
