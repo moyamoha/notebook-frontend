@@ -9,6 +9,7 @@ import Notebook from './pages/Notebook';
 import Favorites from './pages/Favorites';
 
 import './App.css';
+import Loader from './components/common/Loader';
 
 const Settings = lazy(() => import('./pages/Settings'));
 
@@ -46,7 +47,7 @@ function App() {
           path="/settings"
           element={
             user ? (
-              <Suspense fallback={'loading...'}>
+              <Suspense fallback={<Loader></Loader>}>
                 <Settings></Settings>
               </Suspense>
             ) : (
