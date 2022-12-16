@@ -37,7 +37,6 @@ export function getFavorites() {
   return (dispatch: AppDispatch, getState: () => IStore) => {
     const favsString = localStorage.getItem('favorites');
     if (!favsString) {
-      console.log('tuli tänne');
       localStorage.setItem('favorites', JSON.stringify([]));
     } else {
       const favorites: Note[] = JSON.parse(favsString);
@@ -110,7 +109,6 @@ export function editExistingNote(newContent: string) {
       const editedNote = response.data;
       dispatch(replaceNote(editedNote));
       if (noteIsFavorite(favorites, editedNote._id)) {
-        console.log('it does not work?');
         const fIndex = favorites.findIndex((f) => f._id === editedNote._id);
         favorites[fIndex] = editedNote;
         dispatch(setFavorites(favorites));

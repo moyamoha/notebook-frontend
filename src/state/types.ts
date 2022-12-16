@@ -24,6 +24,10 @@ export interface IUser {
   iat?: number;
 }
 
+export type PreferencesObject = {
+  copyNoteAsTextOnly: boolean;
+};
+
 export interface NewUser {
   email: string;
   firstname: string;

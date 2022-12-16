@@ -2,9 +2,20 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { NavigateFunction } from 'react-router';
 
-import { AppDispatch, IStore, IUser, NewUser } from '../types';
+import {
+  AppDispatch,
+  IStore,
+  IUser,
+  NewUser,
+  PreferencesObject,
+} from '../types';
 import { getUsrFullName } from '../../utils/functions';
-import { setUser } from '../slices/user.slice';
+import {
+  ProfileKeyType,
+  resetUserSlice,
+  setProfile,
+  setUser,
+} from '../slices/user.slice';
 import { resetData } from '../slices/data.slice';
 import { setCurrentNote } from '../slices/note.slice';
 import {
@@ -73,10 +84,33 @@ export function logout() {
 
 export function resetStore() {
   return (dispatch: AppDispatch, getState: () => IStore) => {
-    dispatch(setUser(null));
+    dispatch(resetUserSlice());
     dispatch(resetUi());
     dispatch(setCurrentNote(null));
     dispatch(resetData());
+  };
+}
+
+export function getPreferences() {
+  return (dispatch: AppDispatch, getState: () => IStore) => {
+    const prefString = localStorage.getItem('preferences');
+    if (!prefString) {
+      localStorage.setItem(
+        'preferences',
+        JSON.stringify({ copyNoteAsTextOnly: false }),
+      );
+    } else {
+      const prefs: PreferencesObject = JSON.parse(prefString);
+      dispatch(setProfile(prefs));
+    }
+  };
+}
+
+export function editProfile(profileKey: ProfileKeyType, value: any) {
+  return (dispatch: AppDispatch, getState: () => IStore) => {
+    const profile = { ...getState().user.profile, [profileKey]: value };
+    localStorage.setItem('preferences', JSON.stringify(profile));
+    dispatch(setProfile(profile));
   };
 }
 

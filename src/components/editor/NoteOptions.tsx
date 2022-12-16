@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { deleteNote, editExistingNote } from '../../state/api/notes.api';
 import HeartIcon from '../common/HeartIcon';
 import Spacer from '../common/Spacer';
+import { htmlToText } from 'html-to-text';
 
 type NoteOptionsPropsType = {
   editorValue: string;
@@ -18,6 +19,9 @@ type NoteOptionsPropsType = {
 export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
   const dispatch = useAppDispatch();
   const currentNote = useAppSelector((s) => s.note.currentNote);
+  const copyNoteAsTextOnly = useAppSelector(
+    (s) => s.user.profile.copyNoteAsTextOnly,
+  );
   const [showCopied, setShowCopied] = useState(false);
 
   const handleRemoveNote = () => {
@@ -33,7 +37,11 @@ export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
 
   const handleCopyNote = () => {
     if (showCopied) return;
-    window.navigator.clipboard.writeText(editorValue);
+    const textToCopy = copyNoteAsTextOnly
+      ? htmlToText(editorValue)
+      : editorValue;
+    console.log(textToCopy);
+    window.navigator.clipboard.writeText(textToCopy);
     setShowCopied(true);
     setTimeout(() => {
       setShowCopied(false);

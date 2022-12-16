@@ -1,14 +1,13 @@
-import React from 'react';
+import { editProfile } from '../../../state/api/user.api';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { setCopyNoteAsTextOnly } from '../../../state/slices/preferences.slice';
 import Toggle from '../../common/Toggle';
 
 export default function Preferences() {
   const dispatch = useAppDispatch();
-  const copyOnlyText = useAppSelector((s) => s.preferences.copyNoteAsTextOnly);
+  const copyOnlyText = useAppSelector((s) => s.user.profile.copyNoteAsTextOnly);
 
   const handleSetCopyOnlyTextToggleClick = () => {
-    dispatch(setCopyNoteAsTextOnly(!copyOnlyText));
+    dispatch(editProfile('copyNoteAsTextOnly', !copyOnlyText));
   };
 
   return (

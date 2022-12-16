@@ -19,7 +19,6 @@ export default function Favorites() {
 
   React.useEffect(() => {
     if (favorites.length > 0) {
-      console.log('tuli tänne');
       dispatch(setCurrentNote(favorites[0]));
       dispatch(
         setCurrentNotebook(getNotesNotebook(notebooks, favorites[0]._id)),

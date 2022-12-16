@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import EditorPlaceholder from '../components/editor/EditorPlaceholder';
 import RichEditor from '../components/editor/RichEditor';
 import Layout from '../components/layout/Layout';
+import { getPreferences } from '../state/api/user.api';
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -16,6 +17,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getNotebooks(navigate));
     dispatch(getFavorites());
+    dispatch(getPreferences());
   }, []);
 
   return (

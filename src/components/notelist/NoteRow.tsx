@@ -20,7 +20,6 @@ export default function NoteRow({ note }: NoteRowPropsType) {
     dispatch(setCurrentNote(note));
   };
 
-  console.log(getNFirstWords(htmlToText(note.content), 6));
   return (
     <div
       className={
