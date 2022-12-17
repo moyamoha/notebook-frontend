@@ -1,3 +1,4 @@
+import { htmlToText } from 'html-to-text';
 import { IUser, Note, Notebook } from '../state/types';
 
 export const slugify = (text: string): string => {
@@ -49,4 +50,20 @@ export const getNoteIndex = (notebook: Notebook, noteId: string): number => {
 
 export const getUsrFullName = (user: IUser): string => {
   return `${user.firstname} ${user.lastname}`;
+};
+
+export const generateHtmlContentFromNote = (note: Note): string => {
+  const html = `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>${getNFirstWords(htmlToText(note.content), 1)}</title>
+  </head>
+  <body>
+      ${note.content}
+  </body>
+  </html>`;
+  return html;
 };

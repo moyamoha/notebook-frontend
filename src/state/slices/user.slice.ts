@@ -7,12 +7,13 @@ type InitialStateT = {
   profile: PreferencesObject;
 };
 
-export type ProfileKeyType = 'copyNoteAsTextOnly';
+export type ProfileKeyType = 'copyNoteAsTextOnly' | 'downloadNoteAsHtml';
 
 const initialState: InitialStateT = {
   current: null,
   profile: {
     copyNoteAsTextOnly: false,
+    downloadNoteAsHtml: false,
   },
 };
 

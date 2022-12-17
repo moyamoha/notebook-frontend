@@ -26,6 +26,7 @@ export interface IUser {
 
 export type PreferencesObject = {
   copyNoteAsTextOnly: boolean;
+  downloadNoteAsHtml: boolean;
 };
 
 export interface NewUser {

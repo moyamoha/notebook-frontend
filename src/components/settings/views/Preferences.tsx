@@ -5,9 +5,16 @@ import Toggle from '../../common/Toggle';
 export default function Preferences() {
   const dispatch = useAppDispatch();
   const copyOnlyText = useAppSelector((s) => s.user.profile.copyNoteAsTextOnly);
+  const downloadAsHtml = useAppSelector(
+    (s) => s.user.profile.downloadNoteAsHtml,
+  );
 
   const handleSetCopyOnlyTextToggleClick = () => {
     dispatch(editProfile('copyNoteAsTextOnly', !copyOnlyText));
+  };
+
+  const handleSetDownloadTypeToggleClick = () => {
+    dispatch(editProfile('downloadNoteAsHtml', !downloadAsHtml));
   };
 
   return (
@@ -17,6 +24,14 @@ export default function Preferences() {
         <Toggle
           data={copyOnlyText}
           setData={handleSetCopyOnlyTextToggleClick}
+        ></Toggle>
+      </div>
+
+      <div className="preference-row">
+        <span>Download note as html file</span>
+        <Toggle
+          data={downloadAsHtml}
+          setData={handleSetDownloadTypeToggleClick}
         ></Toggle>
       </div>
     </div>
