@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { MdOutlineClose } from 'react-icons/md';
 import Modal from 'react-modal';
 
-import { logout, removeUserAccount } from '../../../state/api/user.api';
+import { removeUserAccount } from '../../../state/api/user.api';
 import { useAppDispatch } from '../../../state/hooks';
 import TextInput from '../../forms/TextInput';
 
