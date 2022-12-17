@@ -24,11 +24,9 @@ export default function NotebookRow({ notebook }: { notebook: Notebook }) {
 
   const handleClick = (e: React.MouseEvent) => {
     // e.stopPropagation();
-    if (isEditing) {
-      if (currentNotebook?._id !== notebook._id) {
-        dispatch(setIsEditingExistingNotebook(false));
-        dispatch(setCurrentNotebook(notebook));
-      }
+    if (isEditing && currentNotebook?._id !== notebook._id) {
+      dispatch(setIsEditingExistingNotebook(false));
+      dispatch(setCurrentNotebook(notebook));
     } else {
       dispatch(setCurrentNotebook(notebook));
     }

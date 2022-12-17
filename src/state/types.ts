@@ -35,9 +35,5 @@ export interface NewUser {
   password: string;
 }
 
-export type Preference = {
-  copyNoteAsTextOnly: boolean;
-};
-
 export type IStore = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
