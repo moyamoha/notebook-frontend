@@ -20,7 +20,6 @@ export default function NoteRow({ note }: NoteRowPropsType) {
       type: 'note',
       item: { ...note },
       collect: (monitor) => ({
-        // isDragging: !!monitor.isDragging(),
         opacity: monitor.isDragging() ? 0.5 : 1,
       }),
     }),

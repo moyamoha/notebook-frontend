@@ -27,11 +27,10 @@ export default function NotebookRow({ notebook }: { notebook: Notebook }) {
   const [, drop] = useDrop(
     () => ({
       accept: 'note',
+      canDrop(item: Note, monitor) {
+        return noteIsInNotebook(notebook, item._id);
+      },
       drop: (item: Note) => {
-        console.log('drop started');
-        if (noteIsInNotebook(notebook, item._id)) {
-          console.log('tänne');
-        }
         dispatch(moveNoteToNotebook(notebook, item, navigate));
       },
     }),
