@@ -17,6 +17,7 @@ import {
   setFavorites,
 } from '../slices/data.slice';
 import { getNotebooks } from './notebooks.api';
+import { setActiveNav } from '../slices/ui.slice';
 
 export function deleteNote() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
@@ -140,6 +141,7 @@ export function moveNoteToNotebook(
       });
       dispatch(getNotebooks(navigate));
       dispatch(getFavorites());
+      dispatch(setActiveNav(`${slugify(target.name)}`));
     } catch (error) {}
   };
 }

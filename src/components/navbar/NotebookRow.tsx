@@ -28,7 +28,6 @@ export default function NotebookRow({ notebook }: { notebook: Notebook }) {
     accept: 'note',
     drop: (item: Note) => {
       if (noteIsInNotebook(notebook, item._id)) return;
-      console.log(item);
       dispatch(moveNoteToNotebook(notebook, item, navigate));
     },
     isOver: () => {
