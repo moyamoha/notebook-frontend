@@ -142,7 +142,7 @@ export function moveNoteToNotebook(
         to: target._id,
       });
       const notebooks = response.data as Notebook[];
-      const curr = notebooks.find((n) => n._id === target._id);
+      const curr = notebooks.find((n) => n._id === target._id) as Notebook;
       dispatch(setCurrentNotebook(curr));
       dispatch(setNotebooks(notebooks));
       dispatch(getFavorites());
