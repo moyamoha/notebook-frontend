@@ -67,3 +67,7 @@ export const generateHtmlContentFromNote = (note: Note): string => {
   </html>`;
   return html;
 };
+
+export const noteIsInNotebook = (notebook: Notebook, noteId: string) => {
+  return notebook.notes.map((n) => n._id).includes(noteId);
+};

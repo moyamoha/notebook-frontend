@@ -4,11 +4,13 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import store, { persistor } from './state/store';
 import App from './App';
 
 import './index.css';
+import { DndProvider } from 'react-dnd/dist/core';
 
 axios.defaults.baseURL = 'https://notebookapp.onrender.com';
 
@@ -27,7 +29,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <BrowserRouter>
       <React.StrictMode>
         <PersistGate loading={null} persistor={persistor}>
-          <App></App>
+          <DndProvider backend={HTML5Backend}>
+            <App />
+          </DndProvider>
         </PersistGate>
       </React.StrictMode>
     </BrowserRouter>

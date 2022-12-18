@@ -1,8 +1,8 @@
 import React from 'react';
 import { SlNotebook } from 'react-icons/sl';
 
-import { Notebook } from '../../state/types';
-import { slugify } from '../../utils/functions';
+import { Note, Notebook } from '../../state/types';
+import { noteIsInNotebook, slugify } from '../../utils/functions';
 import { NavigateFunction, useNavigate } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setCurrentNotebook } from '../../state/slices/data.slice';
@@ -13,6 +13,8 @@ import {
 import Spacer from '../common/Spacer';
 import NotebookField from './NotebookField';
 import NotebookOptions from './NotebookOptions';
+import { useDrop } from 'react-dnd';
+import { moveNoteToNotebook } from '../../state/api/notes.api';
 
 export default function NotebookRow({ notebook }: { notebook: Notebook }) {
   const dispatch = useAppDispatch();
@@ -21,6 +23,18 @@ export default function NotebookRow({ notebook }: { notebook: Notebook }) {
   const currentNotebook = useAppSelector((s) => s.data.currentNotebook);
   const activeNav = useAppSelector((s) => s.ui.activeNav);
   const isEditing = useAppSelector((s) => s.ui.isEditingExistingNotebook);
+
+  const [, drop] = useDrop(() => ({
+    accept: 'note',
+    drop: (item: Note) => {
+      if (noteIsInNotebook(notebook, item._id)) return;
+      console.log(item);
+      dispatch(moveNoteToNotebook(notebook, item, navigate));
+    },
+    isOver: () => {
+      console.log('is Over');
+    },
+  }));
 
   const handleClick = (e: React.MouseEvent) => {
     // e.stopPropagation();
@@ -39,6 +53,7 @@ export default function NotebookRow({ notebook }: { notebook: Notebook }) {
         activeNav === slugify(notebook.name) ? 'nb-row active' : 'nb-row'
       }
       onClick={(e) => handleClick(e)}
+      ref={drop}
     >
       <SlNotebook size={15} className="nav-icon"></SlNotebook>
       {isEditing && currentNotebook?._id === notebook._id ? (

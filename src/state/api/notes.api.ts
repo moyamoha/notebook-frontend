@@ -1,7 +1,13 @@
 import axios from 'axios';
 import { NavigateFunction } from 'react-router';
 
-import { AppDispatch, CreateNewNotePayload, IStore, Note } from '../types';
+import {
+  AppDispatch,
+  CreateNewNotePayload,
+  IStore,
+  Note,
+  Notebook,
+} from '../types';
 import { noteIsFavorite, slugify } from '../../utils/functions';
 import { setCurrentNote } from '../slices/note.slice';
 import {
@@ -10,6 +16,7 @@ import {
   replaceNote,
   setFavorites,
 } from '../slices/data.slice';
+import { getNotebooks } from './notebooks.api';
 
 export function deleteNote() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
@@ -114,6 +121,25 @@ export function editExistingNote(newContent: string) {
         dispatch(setFavorites(favorites));
       }
       dispatch(setCurrentNote(editedNote));
+    } catch (error) {}
+  };
+}
+
+export function moveNoteToNotebook(
+  target: Notebook,
+  note: Note,
+  navigate: NavigateFunction,
+) {
+  return async (dispatch: AppDispatch, getState: () => IStore) => {
+    try {
+      const currentNotebook = getState().data.currentNotebook;
+      if (!target || !currentNotebook || !note) return;
+      await axios.patch(`/notes/move-note/${note._id}`, {
+        from: currentNotebook._id,
+        to: target._id,
+      });
+      dispatch(getNotebooks(navigate));
+      dispatch(getFavorites());
     } catch (error) {}
   };
 }

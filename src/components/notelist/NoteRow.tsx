@@ -7,6 +7,7 @@ import { setCurrentNote } from '../../state/slices/note.slice';
 import HeartIcon from '../common/HeartIcon';
 
 import '../../styles/note-list.css';
+import { useDrag } from 'react-dnd';
 
 type NoteRowPropsType = {
   note: Note;
@@ -14,6 +15,17 @@ type NoteRowPropsType = {
 
 export default function NoteRow({ note }: NoteRowPropsType) {
   const currentNote = useAppSelector((s) => s.note.currentNote);
+  const [{ opacity }, dragRef] = useDrag(
+    () => ({
+      type: 'note',
+      item: { ...note },
+      collect: (monitor) => ({
+        // isDragging: !!monitor.isDragging(),
+        opacity: monitor.isDragging() ? 0.5 : 1,
+      }),
+    }),
+    [],
+  );
   const dispatch = useAppDispatch();
 
   const handleNoteClick = () => {
@@ -28,6 +40,8 @@ export default function NoteRow({ note }: NoteRowPropsType) {
           : 'note-row'
       }
       onClick={handleNoteClick}
+      ref={dragRef}
+      style={{ opacity }}
     >
       <span>
         {note.content
