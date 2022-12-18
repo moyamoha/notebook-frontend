@@ -24,16 +24,19 @@ export default function NotebookRow({ notebook }: { notebook: Notebook }) {
   const activeNav = useAppSelector((s) => s.ui.activeNav);
   const isEditing = useAppSelector((s) => s.ui.isEditingExistingNotebook);
 
-  const [, drop] = useDrop(() => ({
-    accept: 'note',
-    drop: (item: Note) => {
-      if (noteIsInNotebook(notebook, item._id)) return;
-      dispatch(moveNoteToNotebook(notebook, item, navigate));
-    },
-    isOver: () => {
-      console.log('is Over');
-    },
-  }));
+  const [, drop] = useDrop(
+    () => ({
+      accept: 'note',
+      drop: (item: Note) => {
+        console.log('drop started');
+        if (noteIsInNotebook(notebook, item._id)) {
+          console.log('tänne');
+        }
+        dispatch(moveNoteToNotebook(notebook, item, navigate));
+      },
+    }),
+    [notebook],
+  );
 
   const handleClick = (e: React.MouseEvent) => {
     // e.stopPropagation();

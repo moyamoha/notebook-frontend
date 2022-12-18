@@ -14,7 +14,9 @@ import {
   addNoteToNotebook,
   removeNoteFromNotebook,
   replaceNote,
+  setCurrentNotebook,
   setFavorites,
+  setNotebooks,
 } from '../slices/data.slice';
 import { getNotebooks } from './notebooks.api';
 import { setActiveNav } from '../slices/ui.slice';
@@ -135,13 +137,17 @@ export function moveNoteToNotebook(
     try {
       const currentNotebook = getState().data.currentNotebook;
       if (!target || !currentNotebook || !note) return;
-      await axios.patch(`/notes/move-note/${note._id}`, {
+      const response = await axios.patch(`/notes/move-note/${note._id}`, {
         from: currentNotebook._id,
         to: target._id,
       });
-      dispatch(getNotebooks(navigate));
+      const notebooks = response.data as Notebook[];
+      const curr = notebooks.find((n) => n._id === target._id);
+      dispatch(setCurrentNotebook(curr));
+      dispatch(setNotebooks(notebooks));
       dispatch(getFavorites());
       dispatch(setActiveNav(`${slugify(target.name)}`));
+      navigate(`/${slugify(target.name)}`);
     } catch (error) {}
   };
 }
