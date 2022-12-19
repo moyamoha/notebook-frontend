@@ -28,7 +28,7 @@ export default function NotebookRow({ notebook }: { notebook: Notebook }) {
     () => ({
       accept: 'note',
       canDrop(item: Note, monitor) {
-        return noteIsInNotebook(notebook, item._id);
+        return !noteIsInNotebook(notebook, item._id);
       },
       drop: (item: Note) => {
         dispatch(moveNoteToNotebook(notebook, item, navigate));
