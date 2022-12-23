@@ -13,7 +13,8 @@ export const getNFirstWords = (text: string, n: number): string => {
   const firstRow = text.split('\n')[0];
   const splited = firstRow.split(' ').map((w) => w.replaceAll('\n', ''));
   if (n > splited.length) words = splited.length;
-  return splited.slice(0, words).join(' ').toLocaleLowerCase();
+  const result = splited.slice(0, words).join(' ').toLocaleLowerCase();
+  return result.length <= 24 ? result : result.substring(0, 24);
 };
 
 export const getNotesNotebook = (
