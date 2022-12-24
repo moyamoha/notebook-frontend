@@ -18,7 +18,6 @@ import {
   setFavorites,
   setNotebooks,
 } from '../slices/data.slice';
-import { getNotebooks } from './notebooks.api';
 import { setActiveNav } from '../slices/ui.slice';
 
 export function deleteNote() {

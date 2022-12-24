@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { AiOutlineCheck } from 'react-icons/ai';
-import { BiCopy, BiDownload } from 'react-icons/bi';
 import { BsTrash } from 'react-icons/bs';
 import { GrUpdate } from 'react-icons/gr';
 
@@ -10,7 +7,6 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { deleteNote, editExistingNote } from '../../state/api/notes.api';
 import HeartIcon from '../common/HeartIcon';
 import Spacer from '../common/Spacer';
-import { htmlToText } from 'html-to-text';
 import CopyNote from './actions/CopyNote';
 import DownloadNote from './actions/DownloadNote';
 
