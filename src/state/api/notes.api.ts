@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { NavigateFunction } from 'react-router';
+import { htmlToText } from 'html-to-text';
 
 import {
   AppDispatch,
@@ -19,6 +20,7 @@ import {
   setNotebooks,
 } from '../slices/data.slice';
 import { setActiveNav } from '../slices/ui.slice';
+import { blogApiUrl } from '../../utils/constants';
 
 export function deleteNote() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
@@ -147,6 +149,22 @@ export function moveNoteToNotebook(
       dispatch(getFavorites());
       dispatch(setActiveNav(`${slugify(target.name)}`));
       navigate(`/${slugify(target.name)}`);
+    } catch (error) {}
+  };
+}
+
+export function writeBlog(blog: string) {
+  return async (dispatch: AppDispatch, getState: () => IStore) => {
+    try {
+      const title = htmlToText(blog).split('\n')[0].toLocaleLowerCase();
+      const content = blog.substring(blog.indexOf('</h1>') + 5);
+      const updatedAt = new Date().toISOString();
+      const response = await axios.post(blogApiUrl as string, {
+        title,
+        content,
+        updatedAt,
+      });
+      console.log(response.data);
     } catch (error) {}
   };
 }
