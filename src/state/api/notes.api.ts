@@ -159,12 +159,11 @@ export function writeBlog(blog: string) {
       const title = htmlToText(blog).split('\n')[0].toLocaleLowerCase();
       const content = blog.substring(blog.indexOf('</h1>') + 5);
       const updatedAt = new Date().toISOString();
-      const response = await axios.post(blogApiUrl as string, {
+      await axios.post(blogApiUrl as string, {
         title,
         content,
         updatedAt,
       });
-      console.log(response.data);
     } catch (error) {}
   };
 }

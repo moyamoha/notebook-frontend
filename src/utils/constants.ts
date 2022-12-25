@@ -1,3 +1,2 @@
-export const blogApiUrl =
-  'https://killdeer-h5yz-blogapi.moyamoha.deta.app/blogs';
+export const blogApiUrl = 'https://s4sqyr.deta.dev/blogs';
 export const admin = 'salimiyahya50@gmail.com';
