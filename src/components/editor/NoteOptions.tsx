@@ -9,7 +9,6 @@ import HeartIcon from '../common/HeartIcon';
 import Spacer from '../common/Spacer';
 import CopyNote from './actions/CopyNote';
 import DownloadNote from './actions/DownloadNote';
-import ShareNote from './actions/ShareNote';
 
 type NoteOptionsPropsType = {
   editorValue: string;
@@ -40,7 +39,6 @@ export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
       </div>
       <CopyNote editorValue={editorValue}></CopyNote>
       <DownloadNote note={currentNote as Note}></DownloadNote>
-      <ShareNote editorValue={editorValue}></ShareNote>
       <Spacer></Spacer>
       <div className="note-option" onClick={handleSaveNote}>
         <span style={{ fontSize: '0.7rem' }}>
