@@ -20,7 +20,7 @@ export default function HeartIcon({ note }: { note: Note }) {
 
   const handleHeartIconClick = (isFavorite: boolean) => {
     dispatch(setCurrentNote(note));
-    dispatch(editExistingNote({ ...note, isFavorite: isFavorite }));
+    dispatch(editExistingNote({ isFavorite: isFavorite }));
   };
 
   return (
