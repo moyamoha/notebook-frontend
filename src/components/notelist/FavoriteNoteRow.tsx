@@ -1,7 +1,7 @@
 import { htmlToText } from 'html-to-text';
 import { BsHeartFill } from 'react-icons/bs';
 import { SlNotebook } from 'react-icons/sl';
-import { removeFromFavorites } from '../../state/api/notes.api';
+// import { removeFromFavorites } from '../../state/api/notes.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setCurrentNotebook } from '../../state/slices/data.slice';
 import { setCurrentNote } from '../../state/slices/note.slice';
@@ -19,9 +19,9 @@ export default function FavoriteNoteRow({ note }: NoteRowPropsType) {
   const notebooks = useAppSelector((s) => s.data.notebooks);
   const currentNote = useAppSelector((s) => s.note.currentNote);
 
-  const handleHeartFillClick = () => {
-    dispatch(removeFromFavorites(note._id));
-  };
+  // const handleHeartFillClick = () => {
+  //   dispatch(removeFromFavorites(note._id));
+  // };
 
   const handleFavoriteClick = () => {
     dispatch(setCurrentNote(note));
@@ -59,7 +59,7 @@ export default function FavoriteNoteRow({ note }: NoteRowPropsType) {
 
       <BsHeartFill
         className="note-row-heart"
-        onClick={handleHeartFillClick}
+        // onClick={handleHeartFillClick}
       ></BsHeartFill>
     </div>
   );

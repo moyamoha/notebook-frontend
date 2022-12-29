@@ -28,10 +28,8 @@ export function deleteNote() {
     try {
       if (!notebook || !note) return;
       await axios.delete(`/notes/${notebook._id}/${note._id}`);
-      if (noteIsFavorite(getState().data.favorites, note._id)) {
-        dispatch(removeFromFavorites(note._id));
-      }
       dispatch(removeNoteFromNotebook(note._id));
+      if (note.isFavorite) dispatch(updateFavorites());
       if (getState().data.currentNotebook?.notes.length === 0) {
         dispatch(setCurrentNote(null));
       } else {
@@ -43,45 +41,13 @@ export function deleteNote() {
   };
 }
 
-export function getFavorites() {
+export function updateFavorites() {
   return (dispatch: AppDispatch, getState: () => IStore) => {
-    const favsString = localStorage.getItem('favorites');
-    if (!favsString) {
-      localStorage.setItem('favorites', JSON.stringify([]));
-    } else {
-      const favorites: Note[] = JSON.parse(favsString);
-      dispatch(setFavorites(favorites));
-    }
-  };
-}
-
-export function addToFavorites(note: Note) {
-  return (dispatch: AppDispatch, getState: () => IStore) => {
-    const favsString = localStorage.getItem('favorites');
-    if (!favsString) {
-      localStorage.setItem('favorites', JSON.stringify([note]));
-    } else {
-      const favorites: Note[] = JSON.parse(favsString);
-      favorites.push(note);
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-      dispatch(setFavorites(favorites));
-    }
-  };
-}
-
-export function removeFromFavorites(noteId: string) {
-  return (dispatch: AppDispatch, getState: () => IStore) => {
-    const favsString = localStorage.getItem('favorites');
-    if (!favsString) {
-      localStorage.setItem('favorites', JSON.stringify([]));
-    } else {
-      const favorites: Note[] = JSON.parse(favsString);
-      const index = favorites.findIndex((f) => f._id === noteId);
-      if (index === -1) return;
-      favorites.splice(index, 1);
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-      dispatch(setFavorites(favorites));
-    }
+    const allNotes = getState()
+      .data.notebooks.map((n) => n.notes)
+      .flat();
+    const favorites = allNotes.filter((n) => n.isFavorite);
+    dispatch(setFavorites(favorites));
   };
 }
 
@@ -103,26 +69,21 @@ export function createNewNote(
   };
 }
 
-export function editExistingNote(newContent: string) {
+export function editExistingNote(edit: Partial<Note>) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     const notebook = getState().data.currentNotebook;
     const note = getState().note.currentNote;
-    const favorites = [...getState().data.favorites];
     try {
       if (!notebook || !note) {
         return;
       }
       const response = await axios.put(`/notes/${note._id}`, {
-        content: newContent,
+        ...edit,
         updatedAt: new Date(),
       });
       const editedNote = response.data;
       dispatch(replaceNote(editedNote));
-      if (noteIsFavorite(favorites, editedNote._id)) {
-        const fIndex = favorites.findIndex((f) => f._id === editedNote._id);
-        favorites[fIndex] = editedNote;
-        dispatch(setFavorites(favorites));
-      }
+      dispatch(updateFavorites());
       dispatch(setCurrentNote(editedNote));
     } catch (error) {}
   };
@@ -145,7 +106,6 @@ export function moveNoteToNotebook(
       const curr = notebooks.find((n) => n._id === target._id) as Notebook;
       dispatch(setCurrentNotebook(curr));
       dispatch(setNotebooks(notebooks));
-      dispatch(getFavorites());
       dispatch(setActiveNav(`${slugify(target.name)}`));
       navigate(`/${slugify(target.name)}`);
     } catch (error) {}

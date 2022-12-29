@@ -19,12 +19,7 @@ export default function Favorites() {
   const currentNotebook = useAppSelector((s) => s.data.currentNotebook);
 
   React.useEffect(() => {
-    if (
-      currentNote &&
-      currentNotebook &&
-      noteIsFavorite(favorites, currentNote._id)
-    )
-      return;
+    if (currentNote && currentNotebook && currentNote.isFavorite) return;
     if (favorites.length > 0) {
       dispatch(setCurrentNote(favorites[0]));
       dispatch(

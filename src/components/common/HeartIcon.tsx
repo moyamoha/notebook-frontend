@@ -1,12 +1,13 @@
 import React from 'react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
 
-import { addToFavorites, removeFromFavorites } from '../../state/api/notes.api';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { noteIsFavorite } from '../../utils/functions';
 import { Note } from '../../state/types';
 
 import '../../styles/note-list.css';
+import { setCurrentNote } from '../../state/slices/note.slice';
+import { editExistingNote } from '../../state/api/notes.api';
 
 export default function HeartIcon({ note }: { note: Note }) {
   const dispatch = useAppDispatch();
@@ -17,23 +18,23 @@ export default function HeartIcon({ note }: { note: Note }) {
     return noteIsFavorite(favorites, note._id);
   }, [favorites, currentNote]);
 
-  const handleHeartClick = () => {
-    dispatch(addToFavorites(note));
+  const handleHeartIconClick = (isFavorite: boolean) => {
+    dispatch(setCurrentNote(note));
+    console.log('tuli tänne');
+    dispatch(editExistingNote({ ...note, isFavorite: isFavorite }));
   };
-  const handleHeartFillClick = () => {
-    dispatch(removeFromFavorites(note._id));
-  };
+
   return (
     <>
-      {isNoteInFavorites ? (
+      {noteIsFavorite(favorites, note._id) ? (
         <BsHeartFill
           className="note-row-heart"
-          onClick={handleHeartFillClick}
+          onClick={() => handleHeartIconClick(false)}
         ></BsHeartFill>
       ) : (
         <BsHeart
           className="note-row-heart"
-          onClick={handleHeartClick}
+          onClick={() => handleHeartIconClick(true)}
         ></BsHeart>
       )}
     </>

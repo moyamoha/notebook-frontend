@@ -5,6 +5,7 @@ export type Note = {
   _id: string;
   writer: string;
   updatedAt: string | Date;
+  isFavorite: boolean;
 };
 
 export type CreateNewNotePayload = Pick<Note, 'content'>;
