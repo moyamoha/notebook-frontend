@@ -38,15 +38,9 @@ export function getNotebooks(navigate: NavigateFunction) {
 export function deleteNotebook(notebookId: string, navigate: NavigateFunction) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     try {
-      const favorites = [...getState().data.favorites];
       await axios.delete(`/notebooks/${notebookId}`);
       dispatch(removeNotebook(notebookId));
       const notebooks = getState().data.notebooks;
-      const allNotes = notebooks
-        .map((n) => {
-          return [...n.notes];
-        })
-        .flat();
       if (notebooks.length > 0) {
         dispatch(setCurrentNotebook(notebooks[0]));
         if (notebooks[0].notes.length) {
@@ -59,7 +53,7 @@ export function deleteNotebook(notebookId: string, navigate: NavigateFunction) {
         dispatch(setCurrentNotebook(null));
         navigate('/');
       }
-      dispatch(updateFavorites())
+      dispatch(updateFavorites());
     } catch (error: any) {
       dispatch(setError(error.message));
     }

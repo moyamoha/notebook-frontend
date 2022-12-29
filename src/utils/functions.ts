@@ -41,10 +41,6 @@ export const dateToPrettyString = (datetime: Date | string) => {
   return `${time} on ${datePart}`;
 };
 
-export const noteIsFavorite = (favorites: Note[], noteId: string) => {
-  return favorites.findIndex((f) => f._id === noteId) !== -1;
-};
-
 export const getNoteIndex = (notebook: Notebook, noteId: string): number => {
   return notebook.notes.findIndex((n) => n._id === noteId);
 };

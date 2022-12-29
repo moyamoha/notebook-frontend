@@ -9,7 +9,7 @@ import {
   Note,
   Notebook,
 } from '../types';
-import { noteIsFavorite, slugify } from '../../utils/functions';
+import { slugify } from '../../utils/functions';
 import { setCurrentNote } from '../slices/note.slice';
 import {
   addNoteToNotebook,

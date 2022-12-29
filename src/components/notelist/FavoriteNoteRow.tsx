@@ -9,6 +9,7 @@ import { Note } from '../../state/types';
 import { getNotesNotebook, getNFirstWords } from '../../utils/functions';
 
 import '../../styles/note-list.css';
+import { editExistingNote } from '../../state/api/notes.api';
 
 type NoteRowPropsType = {
   note: Note;
@@ -19,9 +20,9 @@ export default function FavoriteNoteRow({ note }: NoteRowPropsType) {
   const notebooks = useAppSelector((s) => s.data.notebooks);
   const currentNote = useAppSelector((s) => s.note.currentNote);
 
-  // const handleHeartFillClick = () => {
-  //   dispatch(removeFromFavorites(note._id));
-  // };
+  const handleHeartFillClick = () => {
+    dispatch(editExistingNote({ isFavorite: false }));
+  };
 
   const handleFavoriteClick = () => {
     dispatch(setCurrentNote(note));
@@ -59,7 +60,7 @@ export default function FavoriteNoteRow({ note }: NoteRowPropsType) {
 
       <BsHeartFill
         className="note-row-heart"
-        // onClick={handleHeartFillClick}
+        onClick={handleHeartFillClick}
       ></BsHeartFill>
     </div>
   );

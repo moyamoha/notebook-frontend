@@ -16,7 +16,6 @@ export default function CopyNote({ editorValue }: { editorValue: string }) {
     const textToCopy = copyNoteAsTextOnly
       ? htmlToText(editorValue)
       : editorValue;
-    console.log(textToCopy);
     window.navigator.clipboard.writeText(textToCopy);
     setShowCopied(true);
     setTimeout(() => {

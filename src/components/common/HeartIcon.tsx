@@ -11,12 +11,6 @@ import { editExistingNote } from '../../state/api/notes.api';
 
 export default function HeartIcon({ note }: { note: Note }) {
   const dispatch = useAppDispatch();
-  const currentNote = useAppSelector((s) => s.note.currentNote);
-  const favorites = useAppSelector((s) => s.data.favorites);
-
-  const isNoteInFavorites = React.useMemo(() => {
-    return noteIsFavorite(favorites, note._id);
-  }, [favorites, currentNote]);
 
   const handleHeartIconClick = (isFavorite: boolean) => {
     dispatch(setCurrentNote(note));

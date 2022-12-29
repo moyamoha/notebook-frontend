@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useNavigate } from 'react-router';
-import { getNotesNotebook, noteIsFavorite } from '../utils/functions';
+import { getNotesNotebook } from '../utils/functions';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { setCurrentNotebook } from '../state/slices/data.slice';
 import { setCurrentNote } from '../state/slices/note.slice';
@@ -12,7 +12,6 @@ import EditorPlaceholder from '../components/editor/EditorPlaceholder';
 
 export default function Favorites() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const favorites = useAppSelector((s) => s.data.favorites);
   const notebooks = useAppSelector((s) => s.data.notebooks);
   const currentNote = useAppSelector((s) => s.note.currentNote);
