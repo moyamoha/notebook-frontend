@@ -20,13 +20,12 @@ export default function HeartIcon({ note }: { note: Note }) {
 
   const handleHeartIconClick = (isFavorite: boolean) => {
     dispatch(setCurrentNote(note));
-    console.log('tuli tänne');
     dispatch(editExistingNote({ ...note, isFavorite: isFavorite }));
   };
 
   return (
     <>
-      {noteIsFavorite(favorites, note._id) ? (
+      {note.isFavorite ? (
         <BsHeartFill
           className="note-row-heart"
           onClick={() => handleHeartIconClick(false)}

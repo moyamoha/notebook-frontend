@@ -26,7 +26,7 @@ export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
   };
 
   const handleSaveNote = () => {
-    dispatch(editExistingNote(editorValue));
+    dispatch(editExistingNote({ content: editorValue }));
   };
 
   return (

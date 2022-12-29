@@ -106,6 +106,7 @@ export function moveNoteToNotebook(
       const curr = notebooks.find((n) => n._id === target._id) as Notebook;
       dispatch(setCurrentNotebook(curr));
       dispatch(setNotebooks(notebooks));
+      if (note.isFavorite) dispatch(updateFavorites());
       dispatch(setActiveNav(`${slugify(target.name)}`));
       navigate(`/${slugify(target.name)}`);
     } catch (error) {}

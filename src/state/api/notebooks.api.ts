@@ -13,6 +13,7 @@ import {
   setFavorites,
   setNotebooks,
 } from '../slices/data.slice';
+import { updateFavorites } from './notes.api';
 
 export function getNotebooks(navigate: NavigateFunction) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
@@ -51,10 +52,6 @@ export function deleteNotebook(notebookId: string, navigate: NavigateFunction) {
         if (notebooks[0].notes.length) {
           dispatch(setCurrentNote(notebooks[0].notes[0]));
         }
-        const filteredFavorites = favorites.filter((f) => {
-          return allNotes.find((n) => n._id === f._id) !== undefined;
-        });
-        dispatch(setFavorites(filteredFavorites));
         navigate(`/${slugify(notebooks[0].name)}`);
         dispatch(setActiveNav(`${slugify(notebooks[0].name)}`));
       } else {
@@ -62,6 +59,7 @@ export function deleteNotebook(notebookId: string, navigate: NavigateFunction) {
         dispatch(setCurrentNotebook(null));
         navigate('/');
       }
+      dispatch(updateFavorites())
     } catch (error: any) {
       dispatch(setError(error.message));
     }
