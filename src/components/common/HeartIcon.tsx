@@ -1,13 +1,11 @@
-import React from 'react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
 
-import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { noteIsFavorite } from '../../utils/functions';
 import { Note } from '../../state/types';
+import { useAppDispatch } from '../../state/hooks';
+import { editExistingNote } from '../../state/api/notes.api';
+import { setCurrentNote } from '../../state/slices/note.slice';
 
 import '../../styles/note-list.css';
-import { setCurrentNote } from '../../state/slices/note.slice';
-import { editExistingNote } from '../../state/api/notes.api';
 
 export default function HeartIcon({ note }: { note: Note }) {
   const dispatch = useAppDispatch();
