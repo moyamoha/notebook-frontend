@@ -16,7 +16,6 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getNotebooks(navigate));
-    dispatch(updateFavorites());
     dispatch(getPreferences());
   }, []);
 

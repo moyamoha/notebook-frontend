@@ -29,6 +29,7 @@ export function getNotebooks(navigate: NavigateFunction) {
         dispatch(setActiveNav(`${slugify(notebooks[0].name)}`));
       }
       dispatch(setNotebooks(notebooks));
+      dispatch(updateFavorites());
     } catch (error: any) {
       dispatch(setError(error.message));
     }
