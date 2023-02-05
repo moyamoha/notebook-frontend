@@ -14,6 +14,7 @@ export const formats = [
   'color',
   'background',
   'direction',
+  'link',
 ];
 
 export const module = {
@@ -22,6 +23,7 @@ export const module = {
       'bold',
       'italic',
       'underline',
+      'link',
       'strike',
       { list: 'ordered' },
       { list: 'bullet' },
