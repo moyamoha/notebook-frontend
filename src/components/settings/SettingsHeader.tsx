@@ -13,7 +13,7 @@ export default function SettingsHeader() {
   return (
     <section className="settings-header">
       <h4>{user ? `${user.firstname} ${user.lastname}` : 'unknown'}</h4>
-      <button className="settings-btn" onClick={handleLogout}>
+      <button className="settings-btn" onClick={handleLogout} disabled={true}>
         Logout
       </button>
       <Spacer></Spacer>

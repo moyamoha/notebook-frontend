@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import EditorPlaceholder from '../components/editor/EditorPlaceholder';
 import RichEditor from '../components/editor/RichEditor';
 import Layout from '../components/layout/Layout';
-import { getPreferences } from '../state/api/user.api';
+import { getPreferences, loginWithDemoUser } from '../state/api/user.api';
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -15,6 +15,7 @@ export default function Home() {
   const currentNote = useAppSelector((s) => s.note.currentNote);
 
   useEffect(() => {
+    dispatch(loginWithDemoUser());
     dispatch(getNotebooks(navigate));
     dispatch(getPreferences());
   }, []);

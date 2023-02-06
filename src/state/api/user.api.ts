@@ -25,40 +25,11 @@ import {
   setSignupBtnLoading,
 } from '../slices/ui.slice';
 
-export function login(
-  credintials: { password: string; email: string },
-  navigateFunc: NavigateFunction,
-) {
-  return async (dispatch: AppDispatch, getState: () => IStore) => {
+export function loginWithDemoUser() {
+  return async (dispatch: AppDispatch) => {
     try {
-      dispatch(setLoginButtonLoading(true));
-      const res = await axios.post('/auth/login', credintials);
-      dispatch(setLoginButtonLoading(false));
-      const token = res.data.access_token;
-      const decodedToken = jwtDecode(token);
-      localStorage.setItem('accessToken', token);
-      dispatch(setUser(decodedToken as IUser));
-      dispatch(setError(''));
-      navigateFunc('/');
-    } catch (error: any) {
-      dispatch(setLoginButtonLoading(false));
-      dispatch(setError(error.response.data.message));
-    }
-  };
-}
-
-export function signup(user: NewUser, navigate: NavigateFunction) {
-  return async (dispatch: AppDispatch, getState: () => IStore) => {
-    try {
-      dispatch(setSignupBtnLoading(true));
-      const res = await axios.post('/auth/signup', user);
-      dispatch(setSignupBtnLoading(false));
-      dispatch(setError(''));
-      navigate('/login');
-    } catch (error: any) {
-      setSignupBtnLoading(false);
-      dispatch(setError(error.response.data.message));
-    }
+      await axios.post('/auth(');
+    } catch (e) {}
   };
 }
 
