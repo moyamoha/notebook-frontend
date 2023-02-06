@@ -28,7 +28,11 @@ import {
 export function loginWithDemoUser() {
   return async (dispatch: AppDispatch) => {
     try {
-      await axios.post('/auth(');
+      const response = await axios.post('/auth/login', {
+        email: 'demo@demo.com',
+        password: 'demo',
+      });
+      dispatch(setUser());
     } catch (e) {}
   };
 }
