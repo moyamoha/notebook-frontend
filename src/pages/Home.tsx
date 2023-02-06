@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-import { getNotebooks } from '../state/api/notebooks.api';
-import { updateFavorites } from '../state/api/notes.api';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import EditorPlaceholder from '../components/editor/EditorPlaceholder';
 import RichEditor from '../components/editor/RichEditor';
@@ -15,8 +13,7 @@ export default function Home() {
   const currentNote = useAppSelector((s) => s.note.currentNote);
 
   useEffect(() => {
-    dispatch(loginWithDemoUser());
-    dispatch(getNotebooks(navigate));
+    dispatch(loginWithDemoUser(navigate));
     dispatch(getPreferences());
   }, []);
 

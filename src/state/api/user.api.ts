@@ -18,21 +18,30 @@ import {
 } from '../slices/user.slice';
 import { resetData } from '../slices/data.slice';
 import { setCurrentNote } from '../slices/note.slice';
-import {
-  resetUi,
-  setError,
-  setLoginButtonLoading,
-  setSignupBtnLoading,
-} from '../slices/ui.slice';
+import { resetUi, setError } from '../slices/ui.slice';
+import { getNotebooks } from './notebooks.api';
 
-export function loginWithDemoUser() {
+export function loginWithDemoUser(navigate: NavigateFunction) {
   return async (dispatch: AppDispatch) => {
     try {
       const response = await axios.post('/auth/login', {
         email: 'demo@demo.com',
         password: 'demo',
       });
-      dispatch(setUser());
+      const token = response.data.access_token;
+      const decodedToken = jwtDecode(token);
+      localStorage.setItem('accessToken', token);
+      axios.interceptors.request.use((config) => {
+        const accessToken = localStorage.getItem('accessToken');
+        if (accessToken) {
+          config.headers = {
+            Authorization: `Bearer ${accessToken}`,
+          };
+        }
+        return config;
+      });
+      dispatch(setUser(decodedToken as IUser));
+      dispatch(getNotebooks(navigate));
     } catch (e) {}
   };
 }

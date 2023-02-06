@@ -12,16 +12,6 @@ import Loader from './components/common/Loader';
 const Settings = lazy(() => import('./pages/Settings'));
 
 function App() {
-  const user = useAppSelector((s) => s.user.current);
-  const goto = useNavigate();
-
-  React.useEffect(() => {
-    if (!user) {
-      localStorage.removeItem('accessToken');
-      goto('/login');
-    }
-  }, [user]);
-
   return (
     <div className="App">
       <Routes>
