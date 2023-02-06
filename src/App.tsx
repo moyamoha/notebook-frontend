@@ -1,10 +1,8 @@
 import React, { lazy, Suspense } from 'react';
-import { Navigate, Route, Routes, useNavigate } from 'react-router';
+import { Route, Routes, useNavigate } from 'react-router';
 
 import { useAppSelector } from './state/hooks';
 import Home from './pages/Home';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
 import Notebook from './pages/Notebook';
 import Favorites from './pages/Favorites';
 
@@ -27,40 +25,19 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route
-          path="/"
-          element={user ? <Home></Home> : <Navigate to="/login"></Navigate>}
-        ></Route>
-        <Route
-          path="/login"
-          element={user ? <Home></Home> : <Login></Login>}
-        ></Route>
-        <Route
-          path="/signup"
-          element={user ? <Home></Home> : <Signup></Signup>}
-        ></Route>
-        <Route
-          path="/favorites"
-          element={user ? <Favorites></Favorites> : <Login></Login>}
-        ></Route>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/login" element={<Home></Home>}></Route>
+        <Route path="/signup" element={<Home></Home>}></Route>
+        <Route path="/favorites" element={<Favorites></Favorites>}></Route>
         <Route
           path="/settings"
           element={
-            user ? (
-              <Suspense fallback={<Loader></Loader>}>
-                <Settings></Settings>
-              </Suspense>
-            ) : (
-              <Login></Login>
-            )
+            <Suspense fallback={<Loader></Loader>}>
+              <Settings></Settings>
+            </Suspense>
           }
         ></Route>
-        <Route
-          path="/:nb_name"
-          element={
-            user ? <Notebook></Notebook> : <Navigate to="/login"></Navigate>
-          }
-        ></Route>
+        <Route path="/:nb_name" element={<Notebook></Notebook>}></Route>
       </Routes>
     </div>
   );
