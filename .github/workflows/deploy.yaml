@@ -1,8 +1,8 @@
 name: Build of the project
 on:
   push:
-    branches:
-      - master
+    branches-ignore:
+      - demo
     paths-ignore:
       - 'README.md'
       - '**/.gitignore'
