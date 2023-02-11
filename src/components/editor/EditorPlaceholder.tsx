@@ -1,9 +1,10 @@
 import { BiPlus } from 'react-icons/bi';
 import { useNavigate } from 'react-router';
+
 import { createNewNote } from '../../state/api/notes.api';
 import { useAppDispatch } from '../../state/hooks';
+
 import '../../styles/editor.css';
-import Spacer from '../common/Spacer';
 
 export default function EditorPlaceholder() {
   const dispatch = useAppDispatch();
