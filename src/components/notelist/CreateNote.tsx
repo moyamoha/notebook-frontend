@@ -2,12 +2,11 @@ import { useNavigate } from 'react-router';
 import { BsPlusCircle } from 'react-icons/bs';
 
 import { createNewNote } from '../../state/api/notes.api';
-import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { useAppDispatch } from '../../state/hooks';
 
 export default function CreateNote() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const currentNotebook = useAppSelector((s) => s.data.currentNotebook);
 
   const handleCreateNewNote = () => {
     const n = {
