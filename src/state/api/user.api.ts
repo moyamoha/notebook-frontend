@@ -56,8 +56,9 @@ export function signup(user: NewUser, navigate: NavigateFunction) {
       dispatch(setError(''));
       navigate('/login');
     } catch (error: any) {
-      setSignupBtnLoading(false);
       dispatch(setError(error.response.data.message));
+    } finally {
+      setSignupBtnLoading(false);
     }
   };
 }

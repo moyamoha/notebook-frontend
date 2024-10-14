@@ -35,6 +35,7 @@ export interface NewUser {
   firstname: string;
   lastname: string;
   password: string;
+  gender: 'male' | 'female';
 }
 
 export type IStore = ReturnType<typeof store.getState>;

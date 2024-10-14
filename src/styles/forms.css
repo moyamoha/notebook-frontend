@@ -5,7 +5,8 @@
   margin-bottom: 15px;
 }
 
-.form-field input {
+.form-field input,
+.form-field select {
   padding: 10px;
   border: 0px;
   background-color: #e3f3fa;

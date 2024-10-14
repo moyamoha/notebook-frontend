@@ -12,17 +12,26 @@ import ErrorAlert from '../components/forms/ErrorAlert';
 
 import '../styles/forms.css';
 import '../styles/login-signup-page.css';
+import CustomSelect from '../components/forms/Select';
 
 export default function Signup() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const loading = useAppSelector((s) => s.ui.signupBtnLoading);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    email: string;
+    firstname: string;
+    lastname: string;
+    password1: string;
+    password2: string;
+    gender: 'male' | 'female';
+  }>({
     email: '',
     firstname: '',
     lastname: '',
     password1: '',
     password2: '',
+    gender: 'male',
   });
 
   const changeState = (key: string, value: string) => {
@@ -42,6 +51,7 @@ export default function Signup() {
           firstname: formData.firstname,
           lastname: formData.lastname,
           password: formData.password1,
+          gender: formData.gender,
         },
         navigate,
       ),
@@ -75,6 +85,14 @@ export default function Signup() {
           field="password2"
           setState={changeState}
         ></PasswordInput>
+        <CustomSelect
+          value={formData.gender}
+          label="Your gender"
+          field="gender"
+          options={['male', 'female']}
+          setState={changeState}
+        ></CustomSelect>
+
         <button type="submit" disabled={loading}>
           {loading ? 'Signing up...' : 'Sign up'}
         </button>
