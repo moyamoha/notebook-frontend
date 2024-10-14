@@ -119,7 +119,7 @@ export function downloadUserData() {
     const user = getState().user.current;
     if (!user) return;
     try {
-      const response = await axios.get('/users/download-data', {
+      const response = await axios.get('/download/notebookapp', {
         responseType: 'blob',
       });
       const blob = new Blob([response.data]);
