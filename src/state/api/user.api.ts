@@ -34,7 +34,7 @@ export function login(
       dispatch(setLoginButtonLoading(true));
       const res = await axios.post('/auth/login', credintials);
       dispatch(setLoginButtonLoading(false));
-      const token = res.data.access_token;
+      const token = res.data.accessToken;
       const decodedToken = jwtDecode(token);
       localStorage.setItem('accessToken', token);
       dispatch(setUser(decodedToken as IUser));

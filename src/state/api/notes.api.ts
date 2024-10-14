@@ -27,7 +27,7 @@ export function deleteNote() {
     const note = getState().note.currentNote;
     try {
       if (!notebook || !note) return;
-      await axios.delete(`/notes/${notebook._id}/${note._id}`);
+      await axios.delete(`/notes/${note._id}/?notebookId=${notebook._id}`);
       dispatch(removeNoteFromNotebook(note._id));
       if (note.isFavorite) dispatch(updateFavorites());
       if (getState().data.currentNotebook?.notes.length === 0) {
@@ -59,7 +59,10 @@ export function createNewNote(
     const notebook = getState().data.currentNotebook;
     try {
       if (!notebook) return;
-      const response = await axios.post(`/notes/${notebook._id}`, note);
+      const response = await axios.post(
+        `/notes/?notebookId=${notebook._id}`,
+        note,
+      );
       dispatch(
         addNoteToNotebook({ notebookId: notebook._id, note: response.data }),
       );
@@ -99,8 +102,8 @@ export function moveNoteToNotebook(
       const currentNotebook = getState().data.currentNotebook;
       if (!target || !currentNotebook || !note) return;
       const response = await axios.patch(`/notes/move-note/${note._id}`, {
-        from: currentNotebook._id,
-        to: target._id,
+        oldNotebookId: currentNotebook._id,
+        newNotebookId: target._id,
       });
       const notebooks = response.data as Notebook[];
       const curr = notebooks.find((n) => n._id === target._id) as Notebook;

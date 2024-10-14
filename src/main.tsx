@@ -12,7 +12,7 @@ import App from './App';
 import './index.css';
 import { DndProvider } from 'react-dnd/dist/core';
 
-axios.defaults.baseURL = 'https://notebookapp.onrender.com';
+axios.defaults.baseURL = 'https://yahya-8csr.onrender.com';
 
 axios.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem('accessToken');
