@@ -9,6 +9,7 @@ import FavoritesBtn from './FavoritesBtn';
 import SettingsBtn from './SettingsBtn';
 
 import '../../styles/navbar.css';
+import AccountSettingsBtn from './AccountSettingsBtn';
 
 export default function Navbar() {
   const notebooks = useSelector((s: IStore) => s.data.notebooks);
@@ -31,6 +32,7 @@ export default function Navbar() {
       </div>
       <div>
         <FavoritesBtn></FavoritesBtn>
+        <AccountSettingsBtn></AccountSettingsBtn>
         <SettingsBtn></SettingsBtn>
       </div>
     </div>

@@ -11,10 +11,6 @@ export const navItems: SettingsNavItem[] = [
     text: 'Preferences',
   },
   {
-    value: 'account',
-    text: 'Account settings',
-  },
-  {
     value: 'data',
     text: 'Data management',
   },

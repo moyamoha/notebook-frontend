@@ -21,60 +21,35 @@ import { setCurrentNote } from '../slices/note.slice';
 import {
   resetUi,
   setError,
-  setLoginButtonLoading,
-  setSignupBtnLoading,
 } from '../slices/ui.slice';
 
 export function login(
-  credintials: { password: string; email: string },
+  token: string,
   navigateFunc: NavigateFunction,
 ) {
   return async (dispatch: AppDispatch, getState: () => IStore) => {
+    const decodedToken = jwtDecode(token);
+    console.log('user.api.ts 32', decodedToken)
+    localStorage.setItem('accessToken', token);
+    dispatch(setUser(decodedToken as IUser));
+    dispatch(setError(''));
+    navigateFunc('/');
+  };
+}
+
+export function fetchProfile() {
+  return async (dispatch: AppDispatch, getState: () => IStore) => {
     try {
-      dispatch(setLoginButtonLoading(true));
-      const res = await axios.post('/auth/login', credintials);
-      dispatch(setLoginButtonLoading(false));
-      const token = res.data.accessToken;
-      const decodedToken = jwtDecode(token);
-      localStorage.setItem('accessToken', token);
-      dispatch(setUser(decodedToken as IUser));
-      dispatch(setError(''));
-      navigateFunc('/');
-    } catch (error: any) {
-      dispatch(setLoginButtonLoading(false));
-      dispatch(setError(error.response.data.message));
+      const resp = await axios.get('/users/profile')
+      if (resp.data) {
+        dispatch(setUser(resp.data as IUser))
+      }
+    } catch (error) {
+      
     }
   };
 }
 
-export function signup(user: NewUser, navigate: NavigateFunction) {
-  return async (dispatch: AppDispatch, getState: () => IStore) => {
-    try {
-      dispatch(setSignupBtnLoading(true));
-      const res = await axios.post('/auth/signup', user);
-      dispatch(setSignupBtnLoading(false));
-      dispatch(setError(''));
-      navigate('/login');
-    } catch (error: any) {
-      dispatch(setError(error.response.data.message));
-    } finally {
-      setSignupBtnLoading(false);
-    }
-  };
-}
-
-export function removeUserAccount(navigate: NavigateFunction) {
-  return async (dispatch: AppDispatch, getState: () => IStore) => {
-    try {
-      await axios.delete('/users/delete-account');
-      dispatch(resetStore());
-      localStorage.clear();
-      navigate('/login');
-    } catch (error: any) {
-      dispatch(setError(error.message));
-    }
-  };
-}
 
 export function logout() {
   return async (dispatch: AppDispatch, getState: () => IStore) => {

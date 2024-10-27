@@ -13,6 +13,13 @@ import './index.css';
 import { DndProvider } from 'react-dnd/dist/core';
 
 axios.defaults.baseURL = 'https://yahya-8csr.onrender.com';
+if (process.env.NODE_ENV === 'production') {
+  console.log = () => {};
+  console.warn = () => {};
+  console.error = () => {};
+  console.info = () => {};
+  console.debug = () => {};
+}
 
 axios.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem('accessToken');
