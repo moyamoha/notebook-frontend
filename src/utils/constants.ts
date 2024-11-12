@@ -1,2 +1,2 @@
-export const AUTH_URL = "http://localhost:8080"
-export const SITE_URL = "http://localhost:5173"
+export const AUTH_URL = 'https://account.yahyasalimi.com';
+export const SITE_URL = 'https://noteapp.yahyasalimi.com';
