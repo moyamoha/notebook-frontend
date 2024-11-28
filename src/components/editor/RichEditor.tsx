@@ -17,14 +17,20 @@ export default function RichEditor() {
   }, [note]);
   return (
     <div className="editor">
-      <ReactQuill
-        theme="snow"
-        value={editorValue}
-        onChange={setEditorValue}
-        formats={formats}
-        modules={module}
-        style={{ height: 'calc(100vh - 82px)', fontSize: '1.2rem' }}
-      />
+      <div
+        style={{
+          fontSize: '1.2rem',
+          overflowY: 'scroll',
+        }}
+      >
+        <ReactQuill
+          theme="snow"
+          value={editorValue}
+          onChange={setEditorValue}
+          formats={formats}
+          modules={module}
+        />
+      </div>
       <NoteOptions editorValue={editorValue}></NoteOptions>
     </div>
   );
