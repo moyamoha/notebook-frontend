@@ -14,10 +14,14 @@
   flex-direction: column;
 }
 
+.ql-editor {
+  min-height: calc(100vh - 84px);
+}
+
 .note-options {
   background-color: #e5e5e5;
   padding: 0;
-  height: 80px;
+  height: 40px;
   border-left: 1px solid rgb(163, 163, 163);
   display: flex;
 }

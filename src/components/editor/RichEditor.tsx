@@ -21,6 +21,7 @@ export default function RichEditor() {
         style={{
           fontSize: '1.2rem',
           overflowY: 'scroll',
+          flex: '1',
         }}
       >
         <ReactQuill
