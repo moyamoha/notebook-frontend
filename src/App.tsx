@@ -29,7 +29,7 @@ function App() {
   const user = useAppSelector((s) => s.user.current);
   useRouteQueryHandler();
   React.useEffect(() => {
-    if (!user) {
+    if (!user && !window.location.href.includes('token=')) {
       localStorage.removeItem('accessToken');
       window.location.href = `${AUTH_URL}/login?redirect=${SITE_URL}`;
     }
