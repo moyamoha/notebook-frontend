@@ -73,6 +73,11 @@ export function createNewNote(
 }
 
 export function editExistingNote(edit: Partial<Note>) {
+  console.log('BEFORE: ', edit.content);
+  if (edit.content) {
+    edit.content = edit.content.replaceAll('<p><br></p>', '<br>');
+  }
+  console.log('AFTER: ', edit.content);
   return async (dispatch: AppDispatch, getState: () => IStore) => {
     const notebook = getState().data.currentNotebook;
     const note = getState().note.currentNote;
