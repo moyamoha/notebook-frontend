@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { BsTrash } from 'react-icons/bs';
 import { GrUpdate } from 'react-icons/gr';
+import { IoCheckmarkDoneOutline } from 'react-icons/io5';
 
 import { Note } from '../../state/types';
 import { dateToPrettyString } from '../../utils/functions';
@@ -10,6 +12,8 @@ import Spacer from '../common/Spacer';
 import CopyNote from './actions/CopyNote';
 import DownloadNote from './actions/DownloadNote';
 
+import '../../styles/note-options.css';
+
 type NoteOptionsPropsType = {
   editorValue: string;
 };
@@ -17,6 +21,7 @@ type NoteOptionsPropsType = {
 export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
   const dispatch = useAppDispatch();
   const currentNote = useAppSelector((s) => s.note.currentNote);
+  const [showSavedText, setShowSavedText] = useState(false);
 
   const handleRemoveNote = () => {
     const confirm = window.confirm(`You really want to delete the note?`);
@@ -26,7 +31,9 @@ export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
   };
 
   const handleSaveNote = () => {
+    setShowSavedText(true);
     dispatch(editExistingNote({ content: editorValue }));
+    setTimeout(() => setShowSavedText(false), 1000); // Stop rotation after 1 second
   };
 
   return (
@@ -40,12 +47,21 @@ export default function NoteOptions({ editorValue }: NoteOptionsPropsType) {
       <CopyNote editorValue={editorValue}></CopyNote>
       <DownloadNote note={currentNote as Note}></DownloadNote>
       <Spacer></Spacer>
-      <div className="note-option" onClick={handleSaveNote}>
-        <span style={{ fontSize: '0.7rem' }}>
-          {dateToPrettyString(currentNote ? currentNote.updatedAt : new Date())}
-        </span>
-        <GrUpdate></GrUpdate>
-      </div>
+      {showSavedText ? (
+        <div className="note-option" onClick={handleSaveNote}>
+          <span style={{ fontSize: '0.7rem' }}>Saved</span>
+          <IoCheckmarkDoneOutline></IoCheckmarkDoneOutline>
+        </div>
+      ) : (
+        <div className="note-option" onClick={handleSaveNote}>
+          <span style={{ fontSize: '0.7rem' }}>
+            {dateToPrettyString(
+              currentNote ? currentNote.updatedAt : new Date(),
+            )}
+          </span>
+          <GrUpdate></GrUpdate>
+        </div>
+      )}
     </div>
   );
 }

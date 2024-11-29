@@ -17,25 +17,3 @@
 .ql-editor {
   min-height: calc(100vh - 84px);
 }
-
-.note-options {
-  background-color: #e5e5e5;
-  padding: 0;
-  height: 40px;
-  border-left: 1px solid rgb(163, 163, 163);
-  display: flex;
-}
-
-.note-options .note-option {
-  cursor: pointer;
-  padding: 0px 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  gap: 5px;
-}
-
-.note-options .note-option:hover {
-  background-color: #ccc;
-}
