@@ -2,6 +2,7 @@
   width: 25%;
   height: 100%;
   background-color: #e5e5e5;
+  overflow-y: scroll;
 }
 
 .note-list-placeholder,

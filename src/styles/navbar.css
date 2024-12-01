@@ -47,4 +47,6 @@
 
 .nb-cont {
   border-bottom: 1px solid whitesmoke;
+  max-height: 350px;
+  overflow-y: scroll;
 }
