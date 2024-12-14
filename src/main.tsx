@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -11,6 +11,7 @@ import App from './App';
 
 import './index.css';
 import { DndProvider } from 'react-dnd/dist/core';
+import { AUTH_URL, SITE_URL } from './utils/constants';
 
 axios.defaults.baseURL = 'https://yahya-8csr.onrender.com';
 if (process.env.NODE_ENV === 'production') {
@@ -30,6 +31,17 @@ axios.interceptors.request.use((config) => {
   }
   return config;
 });
+
+axios.interceptors.response.use(
+  function (resp) {
+    return resp;
+  },
+  function (error) {
+    if (error instanceof AxiosError && error.response?.status === 401) {
+      window.location.href = `${AUTH_URL}/login?redirect=${SITE_URL}`;
+    }
+  },
+);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
